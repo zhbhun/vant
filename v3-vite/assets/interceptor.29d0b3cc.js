@@ -1,1 +1,0 @@
-import{j as t,n as e}from"./use-translate.ed5e29f0.js";import"./with-install.9958dc40.js";function n(n){const{interceptor:s,args:a,done:c,canceled:o}=n;if(s){const n=s.apply(null,a||[]);t(n)?n.then((t=>{t?c():o&&o()})).catch(e):n?c():o&&o()}else c()}export{n as c};
