@@ -355,29 +355,8 @@ vue create hello-world
 
 <span class="hljs-comment"># Open GUI</span>
 vue ui
-</code></pre><p><img src="https://img.yzcdn.cn/vant/vue-cli-demo-201809030812.png" alt=""></p><p>In the GUI, click on &#39;Dependencies&#39; -&gt; <code>Install Dependencies</code> and add <code>vant</code> to the dependencies.</p></div><h2 id="usage" tabindex="-1">Usage</h2><div class="van-doc-card"><h3 id="1.-import-on-demand" tabindex="-1">1. Import on demand</h3><p>Use <a href="https://github.com/ant-design/babel-plugin-import" target="_blank">babel-plugin-import</a> to import components on demand.</p><pre><code class="language-bash"><span class="hljs-comment"># Install plugin</span>
-npm i babel-plugin-import -D
-</code></pre><p>Set babel config in .babelrc or babel.config.js:</p><pre><code class="language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;plugins&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-    <span class="hljs-punctuation">[</span>
-      <span class="hljs-string">&quot;import&quot;</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">&quot;libraryName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vant&quot;</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;libraryDirectory&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;es&quot;</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;style&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span>
-      <span class="hljs-punctuation">}</span>
-    <span class="hljs-punctuation">]</span>
-  <span class="hljs-punctuation">]</span>
-<span class="hljs-punctuation">}</span>
-</code></pre><p>Then you can import components from vant:</p><pre><code class="language-js"><span class="hljs-comment">// Input</span>
-<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Button</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant&#39;</span>;
-
-<span class="hljs-comment">// Output</span>
-<span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button&#39;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style&#39;</span>;
-</code></pre><blockquote><p>If you are using TypeScript\uFF0Cplease use <a href="https://github.com/Brooooooklyn/ts-import-plugin" target="_blank">ts-import-plugin</a> instead.</p></blockquote></div><div class="van-doc-card"><h3 id="2.-vite-plugin" tabindex="-1">2. Vite Plugin</h3><p>If you are using Vite, please use <a href="https://github.com/anncwb/vite-plugin-style-import" target="_blank">vite-plugin-style-import</a>.</p><pre><code class="language-bash">npm i vite-plugin-style-import -D
-</code></pre><pre><code class="language-js"><span class="hljs-comment">// vite.config.js</span>
-<span class="hljs-keyword">import</span> vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;@vitejs/plugin-vue&#39;</span>;
+</code></pre><p><img src="https://img.yzcdn.cn/vant/vue-cli-demo-201809030812.png" alt=""></p><p>In the GUI, click on &#39;Dependencies&#39; -&gt; <code>Install Dependencies</code> and add <code>vant</code> to the dependencies.</p></div><h2 id="usage" tabindex="-1">Usage</h2><div class="van-doc-card"><h3 id="import-on-demand-in-vite-projects-recommended" tabindex="-1">Import on demand in vite projects (recommended)</h3><p>If you are using vite, please use <a href="https://github.com/anncwb/vite-plugin-style-import" target="_blank">vite-plugin-style-import</a>.</p><h4 id="1.-install-plugin" tabindex="-1">1. Install Plugin</h4><pre><code class="language-bash">npm i vite-plugin-style-import -D
+</code></pre><h4 id="2.-configure-plugin" tabindex="-1">2. Configure Plugin</h4><p>Configure the plugin in the <code>vite.config.js</code> file:</p><pre><code class="language-js"><span class="hljs-keyword">import</span> vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;@vitejs/plugin-vue&#39;</span>;
 <span class="hljs-keyword">import</span> styleImport <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vite-plugin-style-import&#39;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
@@ -394,15 +373,42 @@ npm i babel-plugin-import -D
     }),
   ],
 };
-</code></pre></div><div class="van-doc-card"><h3 id="3.-manually-import" tabindex="-1">3. Manually import</h3><pre><code class="language-js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button/index&#39;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style/index&#39;</span>;
-</code></pre></div><div class="van-doc-card"><h3 id="4.-import-all-components" tabindex="-1">4. Import all components</h3><pre><code class="language-js"><span class="hljs-keyword">import</span> { createApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vue&#39;</span>;
+</code></pre><h4 id="3.-import-components" tabindex="-1">3. Import Components</h4><p>Then you can import components from Vant:</p><pre><code class="language-js"><span class="hljs-keyword">import</span> { createApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vue&#39;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Button</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant&#39;</span>;
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">createApp</span>();
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">Button</span>);
+</code></pre><blockquote><p>Vant supports Tree Shaking by default.</p></blockquote></div><div class="van-doc-card"><h3 id="import-on-demand-in-non-vite-projects-recommended" tabindex="-1">Import on demand in non-vite projects (recommended)</h3><p>In non-vite projects, use <a href="https://github.com/ant-design/babel-plugin-import" target="_blank">babel-plugin-import</a> to import components on demand.</p><h4 id="1.-install-plugin-1" tabindex="-1">1. Install Plugin</h4><pre><code class="language-bash">npm i babel-plugin-import -D
+</code></pre><h4 id="2.-configure-plugin-1" tabindex="-1">2. Configure Plugin</h4><p>Set babel config in <code>.babelrc</code> or <code>babel.config.js</code>:</p><pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;plugins&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">[</span>
+      <span class="hljs-string">&quot;import&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;libraryName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vant&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;libraryDirectory&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;es&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;style&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre><h4 id="3.-import-components-1" tabindex="-1">3. Import Components</h4><p>Then you can import components from Vant:</p><pre><code class="language-js"><span class="hljs-comment">// Input</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Button</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant&#39;</span>;
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button&#39;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style&#39;</span>;
+</code></pre><blockquote><p>If you are using TypeScript\uFF0Cplease use <a href="https://github.com/Brooooooklyn/ts-import-plugin" target="_blank">ts-import-plugin</a> instead.</p></blockquote></div><div class="van-doc-card"><h3 id="import-all-components-not-recommended" tabindex="-1">Import all components (not recommended)</h3><p>Import all components will <strong>increase the bundle size</strong>, so this is not recommended.</p><pre><code class="language-js"><span class="hljs-keyword">import</span> { createApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vue&#39;</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-title class_">Vant</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant&#39;</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/lib/index.css&#39;</span>;
 
 <span class="hljs-keyword">const</span> app = <span class="hljs-title function_">createApp</span>();
 app.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">Vant</span>);
-</code></pre><blockquote><p>If you configured babel-plugin-import, you won&#39;t be allowed to import all components.</p></blockquote></div>`,10),rs=[os],is={setup(a,{expose:s}){return s({frontmatter:{}}),(n,t)=>(l(),p("div",cs,rs))}},hs={class:"van-doc-markdown-body"},gs=d(`<h1>\u5FEB\u901F\u4E0A\u624B</h1><div class="van-doc-card"><h3 id="jie-shao" tabindex="-1">\u4ECB\u7ECD</h3><p>\u901A\u8FC7\u672C\u7AE0\u8282\u4F60\u53EF\u4EE5\u4E86\u89E3\u5230 Vant \u7684\u5B89\u88C5\u65B9\u6CD5\u548C\u57FA\u672C\u4F7F\u7528\u59FF\u52BF\u3002</p></div><h2 id="an-zhuang" tabindex="-1">\u5B89\u88C5</h2><div class="van-doc-card"><h3 id="tong-guo-npm-an-zhuang" tabindex="-1">\u901A\u8FC7 npm \u5B89\u88C5</h3><p>\u5728\u73B0\u6709\u9879\u76EE\u4E2D\u4F7F\u7528 Vant \u65F6\uFF0C\u53EF\u4EE5\u901A\u8FC7 <code>npm</code> \u8FDB\u884C\u5B89\u88C5\uFF1A</p><pre><code class="language-bash"><span class="hljs-comment"># Vue 2 \u9879\u76EE\uFF0C\u5B89\u88C5 Vant 2</span>
+</code></pre><blockquote><p>If you configured babel-plugin-import, you won&#39;t be allowed to import all components.</p></blockquote></div><div class="van-doc-card"><h3 id="manually-import-not-recommended" tabindex="-1">Manually import (not recommended)</h3><pre><code class="language-js"><span class="hljs-comment">// import script</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button/index&#39;</span>;
+<span class="hljs-comment">// import style</span>
+<span class="hljs-comment">// if the component does not have a style file, there is no need to import</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style/index&#39;</span>;
+</code></pre></div>`,10),rs=[os],is={setup(a,{expose:s}){return s({frontmatter:{}}),(n,t)=>(l(),p("div",cs,rs))}},hs={class:"van-doc-markdown-body"},gs=d(`<h1>\u5FEB\u901F\u4E0A\u624B</h1><div class="van-doc-card"><h3 id="jie-shao" tabindex="-1">\u4ECB\u7ECD</h3><p>\u901A\u8FC7\u672C\u7AE0\u8282\u4F60\u53EF\u4EE5\u4E86\u89E3\u5230 Vant \u7684\u5B89\u88C5\u65B9\u6CD5\u548C\u57FA\u672C\u4F7F\u7528\u59FF\u52BF\u3002</p></div><h2 id="an-zhuang" tabindex="-1">\u5B89\u88C5</h2><div class="van-doc-card"><h3 id="tong-guo-npm-an-zhuang" tabindex="-1">\u901A\u8FC7 npm \u5B89\u88C5</h3><p>\u5728\u73B0\u6709\u9879\u76EE\u4E2D\u4F7F\u7528 Vant \u65F6\uFF0C\u53EF\u4EE5\u901A\u8FC7 <code>npm</code> \u8FDB\u884C\u5B89\u88C5\uFF1A</p><pre><code class="language-bash"><span class="hljs-comment"># Vue 2 \u9879\u76EE\uFF0C\u5B89\u88C5 Vant 2</span>
 npm i vant@2
 
 <span class="hljs-comment"># Vue 3 \u9879\u76EE\uFF0C\u5B89\u88C5 Vant 3</span>
@@ -438,38 +444,8 @@ pnpm add vant@3
 
   app.<span class="hljs-title function_">mount</span>(<span class="hljs-string">&#39;#app&#39;</span>);
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-</code></pre><h4 id="mian-fei-cdn" tabindex="-1">\u514D\u8D39 CDN</h4><p>\u4F60\u53EF\u4EE5\u901A\u8FC7\u4EE5\u4E0B\u514D\u8D39 CDN \u670D\u52A1\u6765\u4F7F\u7528 Vant:</p><ul><li><a href="https://www.jsdelivr.com/package/npm/vant" target="_blank">jsdelivr</a></li><li><a href="https://cdnjs.com/libraries/vant" target="_blank">cdnjs</a></li><li><a href="https://unpkg.com/" target="_blank">unpkg</a></li></ul><p>\u6CE8\u610F\uFF1A\u514D\u8D39 CDN \u4E00\u822C\u7528\u4E8E\u5236\u4F5C\u539F\u578B\u6216\u4E2A\u4EBA\u5C0F\u578B\u9879\u76EE\uFF0C\u4E0D\u63A8\u8350\u5728\u4F01\u4E1A\u751F\u4EA7\u73AF\u5883\u4E2D\u4F7F\u7528\u514D\u8D39 CDN\u3002</p><p>\u5BF9\u4E8E\u4F01\u4E1A\u5F00\u53D1\u8005\uFF0C\u5EFA\u8BAE\u4F7F\u7528\u4EE5\u4E0B\u65B9\u5F0F\uFF1A</p><ul><li>\u901A\u8FC7 npm \u5F15\u5165\uFF0C\u5E76\u901A\u8FC7\u6784\u5EFA\u5DE5\u5177\u8FDB\u884C\u6253\u5305</li><li>\u4E0B\u8F7D\u5BF9\u5E94\u6587\u4EF6\uFF0C\u5E76\u6258\u7BA1\u5728\u4F60\u81EA\u5DF1\u7684\u670D\u52A1\u5668\u6216 CDN \u4E0A</li></ul></div><div class="van-doc-card"><h3 id="tong-guo-jiao-shou-jia-an-zhuang" tabindex="-1">\u901A\u8FC7\u811A\u624B\u67B6\u5B89\u88C5</h3><p>\u5728\u65B0\u9879\u76EE\u4E2D\u4F7F\u7528 Vant \u65F6\uFF0C\u53EF\u4EE5\u4F7F\u7528 Vue \u5B98\u65B9\u63D0\u4F9B\u7684\u811A\u624B\u67B6 <a href="https://cli.vuejs.org/zh/" target="_blank">Vue Cli</a> \u521B\u5EFA\u9879\u76EE\u5E76\u5B89\u88C5 Vant\u3002</p><pre><code class="language-bash"><span class="hljs-comment"># \u5B89\u88C5 Vue Cli</span>
-npm install -g @vue/cli
-
-<span class="hljs-comment"># \u521B\u5EFA\u4E00\u4E2A\u9879\u76EE</span>
-vue create hello-world
-
-<span class="hljs-comment"># \u521B\u5EFA\u5B8C\u6210\u540E\uFF0C\u53EF\u4EE5\u901A\u8FC7\u547D\u4EE4\u6253\u5F00\u56FE\u5F62\u5316\u754C\u9762\uFF0C\u5982\u4E0B\u56FE\u6240\u793A</span>
-vue ui
-</code></pre><p><img src="https://img.yzcdn.cn/vant/vue-cli-demo-201809032000.png" alt=""></p><p>\u5728\u56FE\u5F62\u5316\u754C\u9762\u4E2D\uFF0C\u70B9\u51FB <code>\u4F9D\u8D56</code> -&gt; <code>\u5B89\u88C5\u4F9D\u8D56</code>\uFF0C\u7136\u540E\u5C06 <code>vant</code> \u6DFB\u52A0\u5230\u4F9D\u8D56\u4E2D\u5373\u53EF\u3002</p></div><h2 id="shi-li" tabindex="-1">\u793A\u4F8B</h2><div class="van-doc-card"><h3 id="shi-li-gong-cheng" tabindex="-1">\u793A\u4F8B\u5DE5\u7A0B</h3><p>\u6211\u4EEC\u63D0\u4F9B\u4E86\u4E30\u5BCC\u7684<a href="https://github.com/youzan/vant-demo" target="_blank">\u793A\u4F8B\u5DE5\u7A0B</a>\uFF0C\u901A\u8FC7\u793A\u4F8B\u5DE5\u7A0B\u4F60\u53EF\u4EE5\u4E86\u89E3\u5982\u4E0B\u5185\u5BB9\uFF1A</p><ul><li>\u57FA\u4E8E Vite \u548C Vant \u642D\u5EFA\u5E94\u7528</li><li>\u57FA\u4E8E Nuxt \u548C Vant \u642D\u5EFA\u5E94\u7528</li><li>\u57FA\u4E8E Vue Cli \u548C Vant \u642D\u5EFA\u5E94\u7528</li><li>\u914D\u7F6E\u6309\u9700\u5F15\u5165\u7EC4\u4EF6</li><li>\u914D\u7F6E\u57FA\u4E8E Rem \u7684\u9002\u914D\u65B9\u6848</li><li>\u914D\u7F6E\u57FA\u4E8E Viewport \u7684\u9002\u914D\u65B9\u6848</li><li>\u914D\u7F6E\u57FA\u4E8E TypeScript \u7684\u5DE5\u7A0B</li><li>\u914D\u7F6E\u81EA\u5B9A\u4E49\u4E3B\u9898\u8272\u65B9\u6848</li></ul></div><h2 id="yin-ru-zu-jian" tabindex="-1">\u5F15\u5165\u7EC4\u4EF6</h2><div class="van-doc-card"><h3 id="fang-shi-yi.-tong-guo-babel-cha-jian-an-xu-yin-ru-zu-jian" tabindex="-1">\u65B9\u5F0F\u4E00. \u901A\u8FC7 babel \u63D2\u4EF6\u6309\u9700\u5F15\u5165\u7EC4\u4EF6</h3><p><a href="https://github.com/ant-design/babel-plugin-import" target="_blank">babel-plugin-import</a> \u662F\u4E00\u6B3E babel \u63D2\u4EF6\uFF0C\u5B83\u4F1A\u5728\u7F16\u8BD1\u8FC7\u7A0B\u4E2D\u5C06 import \u8BED\u53E5\u81EA\u52A8\u8F6C\u6362\u4E3A\u6309\u9700\u5F15\u5165\u7684\u65B9\u5F0F\u3002</p><pre><code class="language-bash"><span class="hljs-comment"># \u5B89\u88C5\u63D2\u4EF6</span>
-npm i babel-plugin-import -D
-</code></pre><p>\u5728.babelrc \u6216 babel.config.js \u4E2D\u6DFB\u52A0\u914D\u7F6E\uFF1A</p><pre><code class="language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">&quot;plugins&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
-    <span class="hljs-punctuation">[</span>
-      <span class="hljs-string">&quot;import&quot;</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-punctuation">{</span>
-        <span class="hljs-attr">&quot;libraryName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vant&quot;</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;libraryDirectory&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;es&quot;</span><span class="hljs-punctuation">,</span>
-        <span class="hljs-attr">&quot;style&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span>
-      <span class="hljs-punctuation">}</span>
-    <span class="hljs-punctuation">]</span>
-  <span class="hljs-punctuation">]</span>
-<span class="hljs-punctuation">}</span>
-</code></pre><p>\u63A5\u7740\u4F60\u53EF\u4EE5\u5728\u4EE3\u7801\u4E2D\u76F4\u63A5\u5F15\u5165 Vant \u7EC4\u4EF6\uFF0C\u63D2\u4EF6\u4F1A\u81EA\u52A8\u5C06\u4EE3\u7801\u8F6C\u5316\u4E3A\u6309\u9700\u5F15\u5165\u7684\u5F62\u5F0F\u3002</p><pre><code class="language-js"><span class="hljs-comment">// \u539F\u59CB\u4EE3\u7801</span>
-<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Button</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant&#39;</span>;
-
-<span class="hljs-comment">// \u7F16\u8BD1\u540E\u4EE3\u7801</span>
-<span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button&#39;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style&#39;</span>;
-</code></pre><blockquote><p>\u5982\u679C\u4F60\u5728\u4F7F\u7528 TypeScript\uFF0C\u53EF\u4EE5\u4F7F\u7528 <a href="https://github.com/Brooooooklyn/ts-import-plugin" target="_blank">ts-import-plugin</a> \u5B9E\u73B0\u6309\u9700\u5F15\u5165\u3002</p></blockquote></div><div class="van-doc-card"><h3 id="fang-shi-er.-zai-vite-xiang-mu-zhong-an-xu-yin-ru-zu-jian" tabindex="-1">\u65B9\u5F0F\u4E8C. \u5728 Vite \u9879\u76EE\u4E2D\u6309\u9700\u5F15\u5165\u7EC4\u4EF6</h3><p>\u5BF9\u4E8E vite \u9879\u76EE\uFF0C\u53EF\u4EE5\u4F7F\u7528 <a href="https://github.com/anncwb/vite-plugin-style-import" target="_blank">vite-plugin-style-import</a> \u5B9E\u73B0\u6309\u9700\u5F15\u5165, \u539F\u7406\u548C <code>babel-plugin-import</code> \u7C7B\u4F3C\u3002</p><pre><code class="language-bash"><span class="hljs-comment"># \u5B89\u88C5\u63D2\u4EF6</span>
-npm i vite-plugin-style-import -D
-</code></pre><pre><code class="language-js"><span class="hljs-comment">// vite.config.js</span>
-<span class="hljs-keyword">import</span> vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;@vitejs/plugin-vue&#39;</span>;
+</code></pre><h4 id="mian-fei-cdn" tabindex="-1">\u514D\u8D39 CDN</h4><p>\u4F60\u53EF\u4EE5\u901A\u8FC7\u4EE5\u4E0B\u514D\u8D39 CDN \u670D\u52A1\u6765\u4F7F\u7528 Vant:</p><ul><li><a href="https://www.jsdelivr.com/package/npm/vant" target="_blank">jsdelivr</a></li><li><a href="https://cdnjs.com/libraries/vant" target="_blank">cdnjs</a></li><li><a href="https://unpkg.com/" target="_blank">unpkg</a></li></ul><p>\u6CE8\u610F\uFF1A\u514D\u8D39 CDN \u4E00\u822C\u7528\u4E8E\u5236\u4F5C\u539F\u578B\u6216\u4E2A\u4EBA\u5C0F\u578B\u9879\u76EE\uFF0C\u4E0D\u63A8\u8350\u5728\u4F01\u4E1A\u751F\u4EA7\u73AF\u5883\u4E2D\u4F7F\u7528\u514D\u8D39 CDN\u3002</p><p>\u5BF9\u4E8E\u4F01\u4E1A\u5F00\u53D1\u8005\uFF0C\u5EFA\u8BAE\u4F7F\u7528\u4EE5\u4E0B\u65B9\u5F0F\uFF1A</p><ul><li>\u901A\u8FC7 npm \u5F15\u5165\uFF0C\u5E76\u901A\u8FC7\u6784\u5EFA\u5DE5\u5177\u8FDB\u884C\u6253\u5305</li><li>\u4E0B\u8F7D\u5BF9\u5E94\u6587\u4EF6\uFF0C\u5E76\u6258\u7BA1\u5728\u4F60\u81EA\u5DF1\u7684\u670D\u52A1\u5668\u6216 CDN \u4E0A</li></ul></div><h2 id="shi-li" tabindex="-1">\u793A\u4F8B</h2><div class="van-doc-card"><h3 id="shi-li-gong-cheng" tabindex="-1">\u793A\u4F8B\u5DE5\u7A0B</h3><p>\u6211\u4EEC\u63D0\u4F9B\u4E86\u4E30\u5BCC\u7684<a href="https://github.com/youzan/vant-demo" target="_blank">\u793A\u4F8B\u5DE5\u7A0B</a>\uFF0C\u901A\u8FC7\u793A\u4F8B\u5DE5\u7A0B\u4F60\u53EF\u4EE5\u4E86\u89E3\u5982\u4E0B\u5185\u5BB9\uFF1A</p><ul><li>\u57FA\u4E8E Vite \u548C Vant \u642D\u5EFA\u5E94\u7528</li><li>\u57FA\u4E8E Nuxt \u548C Vant \u642D\u5EFA\u5E94\u7528</li><li>\u57FA\u4E8E Vue Cli \u548C Vant \u642D\u5EFA\u5E94\u7528</li><li>\u914D\u7F6E\u6309\u9700\u5F15\u5165\u7EC4\u4EF6</li><li>\u914D\u7F6E\u57FA\u4E8E Rem \u7684\u9002\u914D\u65B9\u6848</li><li>\u914D\u7F6E\u57FA\u4E8E Viewport \u7684\u9002\u914D\u65B9\u6848</li><li>\u914D\u7F6E\u57FA\u4E8E TypeScript \u7684\u5DE5\u7A0B</li><li>\u914D\u7F6E\u81EA\u5B9A\u4E49\u4E3B\u9898\u8272\u65B9\u6848</li></ul></div><h2 id="yin-ru-zu-jian" tabindex="-1">\u5F15\u5165\u7EC4\u4EF6</h2><div class="van-doc-card"><h3 id="zai-vite-xiang-mu-zhong-an-xu-yin-ru-zu-jian-tui-jian" tabindex="-1">\u5728 vite \u9879\u76EE\u4E2D\u6309\u9700\u5F15\u5165\u7EC4\u4EF6\uFF08\u63A8\u8350\uFF09</h3><p>\u5728 vite \u9879\u76EE\u4E2D\u4F7F\u7528 Vant \u65F6\uFF0C\u63A8\u8350\u5B89\u88C5 <a href="https://github.com/anncwb/vite-plugin-style-import" target="_blank">vite-plugin-style-import</a> \u63D2\u4EF6\uFF0C\u5B83\u53EF\u4EE5\u81EA\u52A8\u6309\u9700\u5F15\u5165\u7EC4\u4EF6\u7684\u6837\u5F0F\u3002</p><h4 id="1.-an-zhuang-cha-jian" tabindex="-1">1. \u5B89\u88C5\u63D2\u4EF6</h4><pre><code class="language-bash">npm i vite-plugin-style-import -D
+</code></pre><h4 id="2.-pei-zhi-cha-jian" tabindex="-1">2. \u914D\u7F6E\u63D2\u4EF6</h4><p>\u5B89\u88C5\u5B8C\u6210\u540E\uFF0C\u5728 <code>vite.config.js</code> \u6587\u4EF6\u4E2D\u914D\u7F6E\u63D2\u4EF6\uFF1A</p><pre><code class="language-js"><span class="hljs-keyword">import</span> vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;@vitejs/plugin-vue&#39;</span>;
 <span class="hljs-keyword">import</span> styleImport <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vite-plugin-style-import&#39;</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
@@ -486,17 +462,42 @@ npm i vite-plugin-style-import -D
     }),
   ],
 };
-</code></pre></div><div class="van-doc-card"><h3 id="fang-shi-san.-shou-dong-an-xu-yin-ru-zu-jian" tabindex="-1">\u65B9\u5F0F\u4E09. \u624B\u52A8\u6309\u9700\u5F15\u5165\u7EC4\u4EF6</h3><p>\u5728\u4E0D\u4F7F\u7528\u63D2\u4EF6\u7684\u60C5\u51B5\u4E0B\uFF0C\u53EF\u4EE5\u624B\u52A8\u5F15\u5165\u9700\u8981\u4F7F\u7528\u7684\u7EC4\u4EF6\u548C\u6837\u5F0F\u3002</p><pre><code class="language-js"><span class="hljs-comment">// \u5F15\u5165\u7EC4\u4EF6</span>
-<span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button/index&#39;</span>;
-<span class="hljs-comment">// \u5F15\u5165\u7EC4\u4EF6\u5BF9\u5E94\u7684\u6837\u5F0F\uFF0C\u82E5\u7EC4\u4EF6\u6CA1\u6709\u6837\u5F0F\u6587\u4EF6\uFF0C\u5219\u65E0\u987B\u5F15\u5165</span>
-<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style/index&#39;</span>;
-</code></pre></div><div class="van-doc-card"><h3 id="fang-shi-si.-dao-ru-suo-you-zu-jian" tabindex="-1">\u65B9\u5F0F\u56DB. \u5BFC\u5165\u6240\u6709\u7EC4\u4EF6</h3><p>Vant \u652F\u6301\u4E00\u6B21\u6027\u5BFC\u5165\u6240\u6709\u7EC4\u4EF6\uFF0C\u5F15\u5165\u6240\u6709\u7EC4\u4EF6\u4F1A\u589E\u52A0\u4EE3\u7801\u5305\u4F53\u79EF\uFF0C\u56E0\u6B64\u4E0D\u63A8\u8350\u8FD9\u79CD\u505A\u6CD5\u3002</p><pre><code class="language-js"><span class="hljs-keyword">import</span> { createApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vue&#39;</span>;
+</code></pre><h4 id="3.-yin-ru-zu-jian" tabindex="-1">3. \u5F15\u5165\u7EC4\u4EF6</h4><p>\u5B8C\u6210\u4EE5\u4E0A\u4E24\u6B65\uFF0C\u5C31\u53EF\u4EE5\u76F4\u63A5\u4F7F\u7528 Vant \u7EC4\u4EF6\u4E86\uFF1A</p><pre><code class="language-js"><span class="hljs-keyword">import</span> { createApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vue&#39;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Button</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant&#39;</span>;
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">createApp</span>();
+app.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">Button</span>);
+</code></pre><blockquote><p>Vant \u9ED8\u8BA4\u652F\u6301\u901A\u8FC7 Tree Shaking \u5B9E\u73B0 script \u7684\u6309\u9700\u5F15\u5165\u3002</p></blockquote></div><div class="van-doc-card"><h3 id="zai-fei-vite-xiang-mu-zhong-an-xu-yin-ru-zu-jian-tui-jian" tabindex="-1">\u5728\u975E vite \u9879\u76EE\u4E2D\u6309\u9700\u5F15\u5165\u7EC4\u4EF6\uFF08\u63A8\u8350\uFF09</h3><p>\u5728\u975E vite \u7684\u9879\u76EE\u4E2D\uFF0C\u53EF\u4EE5\u901A\u8FC7 babel \u63D2\u4EF6\u6765\u5B9E\u73B0\u6309\u9700\u5F15\u5165\u7EC4\u4EF6\u3002\u6211\u4EEC\u9700\u8981\u5B89\u88C5 <a href="https://github.com/ant-design/babel-plugin-import" target="_blank">babel-plugin-import</a> \u63D2\u4EF6\uFF0C\u5B83\u4F1A\u5728\u7F16\u8BD1\u8FC7\u7A0B\u4E2D\u5C06 import \u8BED\u53E5\u81EA\u52A8\u8F6C\u6362\u4E3A\u6309\u9700\u5F15\u5165\u7684\u65B9\u5F0F\u3002</p><h4 id="1.-an-zhuang-cha-jian-1" tabindex="-1">1. \u5B89\u88C5\u63D2\u4EF6</h4><pre><code class="language-bash">npm i babel-plugin-import -D
+</code></pre><h4 id="2.-pei-zhi-cha-jian-1" tabindex="-1">2. \u914D\u7F6E\u63D2\u4EF6</h4><p>\u5728.babelrc \u6216 babel.config.js \u4E2D\u6DFB\u52A0\u914D\u7F6E\uFF1A</p><pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;plugins&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">[</span>
+      <span class="hljs-string">&quot;import&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;libraryName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vant&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;libraryDirectory&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;es&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;style&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-keyword">true</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre><h4 id="3.-yin-ru-zu-jian-1" tabindex="-1">3. \u5F15\u5165\u7EC4\u4EF6</h4><p>\u63A5\u7740\u4F60\u53EF\u4EE5\u5728\u4EE3\u7801\u4E2D\u76F4\u63A5\u5F15\u5165 Vant \u7EC4\u4EF6\uFF0C\u63D2\u4EF6\u4F1A\u81EA\u52A8\u5C06\u4EE3\u7801\u8F6C\u5316\u4E3A\u6309\u9700\u5F15\u5165\u7684\u5F62\u5F0F\u3002</p><pre><code class="language-js"><span class="hljs-comment">// \u539F\u59CB\u4EE3\u7801</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Button</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant&#39;</span>;
+
+<span class="hljs-comment">// \u7F16\u8BD1\u540E\u4EE3\u7801</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button&#39;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style&#39;</span>;
+</code></pre><blockquote><p>\u5982\u679C\u4F60\u5728\u4F7F\u7528 TypeScript\uFF0C\u53EF\u4EE5\u4F7F\u7528 <a href="https://github.com/Brooooooklyn/ts-import-plugin" target="_blank">ts-import-plugin</a> \u5B9E\u73B0\u6309\u9700\u5F15\u5165\u3002</p></blockquote></div><div class="van-doc-card"><h3 id="dao-ru-suo-you-zu-jian-bu-tui-jian" tabindex="-1">\u5BFC\u5165\u6240\u6709\u7EC4\u4EF6\uFF08\u4E0D\u63A8\u8350\uFF09</h3><p>Vant \u652F\u6301\u4E00\u6B21\u6027\u5BFC\u5165\u6240\u6709\u7EC4\u4EF6\uFF0C\u5F15\u5165\u6240\u6709\u7EC4\u4EF6\u4F1A<strong>\u589E\u52A0\u4EE3\u7801\u5305\u4F53\u79EF</strong>\uFF0C\u56E0\u6B64\u4E0D\u63A8\u8350\u8FD9\u79CD\u505A\u6CD5\u3002</p><pre><code class="language-js"><span class="hljs-keyword">import</span> { createApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vue&#39;</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-title class_">Vant</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant&#39;</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/lib/index.css&#39;</span>;
 
 <span class="hljs-keyword">const</span> app = <span class="hljs-title function_">createApp</span>();
 app.<span class="hljs-title function_">use</span>(<span class="hljs-title class_">Vant</span>);
-</code></pre><blockquote><p>Tips: \u914D\u7F6E\u6309\u9700\u5F15\u5165\u540E\uFF0C\u5C06\u4E0D\u5141\u8BB8\u76F4\u63A5\u5BFC\u5165\u6240\u6709\u7EC4\u4EF6\u3002</p></blockquote></div>`,13),us=[gs],js={setup(a,{expose:s}){return s({frontmatter:{}}),(n,t)=>(l(),p("div",hs,us))}},ms={class:"van-doc-markdown-body"},vs=d(`<h1>\u98CE\u683C\u6307\u5357</h1><div class="van-doc-card"><h3 id="jie-shao" tabindex="-1">\u4ECB\u7ECD</h3><p>\u5728\u53C2\u4E0E Vant \u5F00\u53D1\u65F6\uFF0C\u8BF7\u9075\u5B88\u7EA6\u5B9A\u7684\u5355\u6587\u4EF6\u7EC4\u4EF6\u98CE\u683C\u6307\u5357\uFF0C\u6307\u5357\u5185\u5BB9\u8282\u9009\u81EA <a href="https://v3.cn.vuejs.org/style-guide/" target="_blank">Vue \u5B98\u65B9\u98CE\u683C\u6307\u5357</a>\u3002</p></div><div class="van-doc-card"><h3 id="zu-jian-shu-ju" tabindex="-1">\u7EC4\u4EF6\u6570\u636E</h3><p>\u7EC4\u4EF6\u7684 data \u5FC5\u987B\u662F\u4E00\u4E2A\u51FD\u6570\u3002</p><pre><code class="language-js"><span class="hljs-comment">// bad</span>
+</code></pre><blockquote><p>Tips: \u914D\u7F6E\u6309\u9700\u5F15\u5165\u63D2\u4EF6\u540E\uFF0C\u5C06\u4E0D\u5141\u8BB8\u76F4\u63A5\u5BFC\u5165\u6240\u6709\u7EC4\u4EF6\u3002</p></blockquote></div><div class="van-doc-card"><h3 id="shou-dong-an-xu-yin-ru-zu-jian-bu-tui-jian" tabindex="-1">\u624B\u52A8\u6309\u9700\u5F15\u5165\u7EC4\u4EF6\uFF08\u4E0D\u63A8\u8350\uFF09</h3><p>\u5728\u4E0D\u4F7F\u7528\u4EFB\u4F55\u6784\u5EFA\u63D2\u4EF6\u7684\u60C5\u51B5\u4E0B\uFF0C\u53EF\u4EE5\u624B\u52A8\u5F15\u5165\u9700\u8981\u4F7F\u7528\u7684\u7EC4\u4EF6\u548C\u6837\u5F0F\u3002</p><pre><code class="language-js"><span class="hljs-comment">// \u5F15\u5165\u7EC4\u4EF6\u811A\u672C</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button/index&#39;</span>;
+<span class="hljs-comment">// \u5F15\u5165\u7EC4\u4EF6\u6837\u5F0F</span>
+<span class="hljs-comment">// \u82E5\u7EC4\u4EF6\u6CA1\u6709\u6837\u5F0F\u6587\u4EF6\uFF0C\u5219\u65E0\u987B\u5F15\u5165</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style/index&#39;</span>;
+</code></pre></div>`,12),us=[gs],js={setup(a,{expose:s}){return s({frontmatter:{}}),(n,t)=>(l(),p("div",hs,us))}},ms={class:"van-doc-markdown-body"},vs=d(`<h1>\u98CE\u683C\u6307\u5357</h1><div class="van-doc-card"><h3 id="jie-shao" tabindex="-1">\u4ECB\u7ECD</h3><p>\u5728\u53C2\u4E0E Vant \u5F00\u53D1\u65F6\uFF0C\u8BF7\u9075\u5B88\u7EA6\u5B9A\u7684\u5355\u6587\u4EF6\u7EC4\u4EF6\u98CE\u683C\u6307\u5357\uFF0C\u6307\u5357\u5185\u5BB9\u8282\u9009\u81EA <a href="https://v3.cn.vuejs.org/style-guide/" target="_blank">Vue \u5B98\u65B9\u98CE\u683C\u6307\u5357</a>\u3002</p></div><div class="van-doc-card"><h3 id="zu-jian-shu-ju" tabindex="-1">\u7EC4\u4EF6\u6570\u636E</h3><p>\u7EC4\u4EF6\u7684 data \u5FC5\u987B\u662F\u4E00\u4E2A\u51FD\u6570\u3002</p><pre><code class="language-js"><span class="hljs-comment">// bad</span>
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
   <span class="hljs-attr">data</span>: {
     <span class="hljs-attr">foo</span>: <span class="hljs-string">&#39;bar&#39;</span>,
