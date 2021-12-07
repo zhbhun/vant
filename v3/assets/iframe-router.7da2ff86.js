@@ -388,14 +388,14 @@ npm i babel-plugin-import -D
         {
           <span class="hljs-attr">libraryName</span>: <span class="hljs-string">&#39;vant&#39;</span>,
           <span class="hljs-attr">esModule</span>: <span class="hljs-literal">true</span>,
-          <span class="hljs-attr">resolveStyle</span>: <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> <span class="hljs-string">\`vant/es/<span class="hljs-subst">\${name}</span>/style\`</span>,
+          <span class="hljs-attr">resolveStyle</span>: <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> <span class="hljs-string">\`vant/es/<span class="hljs-subst">\${name}</span>/style/index\`</span>,
         },
       ],
     }),
   ],
 };
-</code></pre></div><div class="van-doc-card"><h3 id="3.-manually-import" tabindex="-1">3. Manually import</h3><pre><code class="language-js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button&#39;</span>;
-<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style&#39;</span>;
+</code></pre></div><div class="van-doc-card"><h3 id="3.-manually-import" tabindex="-1">3. Manually import</h3><pre><code class="language-js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button/index&#39;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style/index&#39;</span>;
 </code></pre></div><div class="van-doc-card"><h3 id="4.-import-all-components" tabindex="-1">4. Import all components</h3><pre><code class="language-js"><span class="hljs-keyword">import</span> { createApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vue&#39;</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-title class_">Vant</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant&#39;</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/lib/index.css&#39;</span>;
@@ -480,16 +480,16 @@ npm i vite-plugin-style-import -D
         {
           <span class="hljs-attr">libraryName</span>: <span class="hljs-string">&#39;vant&#39;</span>,
           <span class="hljs-attr">esModule</span>: <span class="hljs-literal">true</span>,
-          <span class="hljs-attr">resolveStyle</span>: <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> <span class="hljs-string">\`vant/es/<span class="hljs-subst">\${name}</span>/style\`</span>,
+          <span class="hljs-attr">resolveStyle</span>: <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> <span class="hljs-string">\`vant/es/<span class="hljs-subst">\${name}</span>/style/index\`</span>,
         },
       ],
     }),
   ],
 };
 </code></pre></div><div class="van-doc-card"><h3 id="fang-shi-san.-shou-dong-an-xu-yin-ru-zu-jian" tabindex="-1">\u65B9\u5F0F\u4E09. \u624B\u52A8\u6309\u9700\u5F15\u5165\u7EC4\u4EF6</h3><p>\u5728\u4E0D\u4F7F\u7528\u63D2\u4EF6\u7684\u60C5\u51B5\u4E0B\uFF0C\u53EF\u4EE5\u624B\u52A8\u5F15\u5165\u9700\u8981\u4F7F\u7528\u7684\u7EC4\u4EF6\u548C\u6837\u5F0F\u3002</p><pre><code class="language-js"><span class="hljs-comment">// \u5F15\u5165\u7EC4\u4EF6</span>
-<span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button&#39;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">Button</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant/es/button/index&#39;</span>;
 <span class="hljs-comment">// \u5F15\u5165\u7EC4\u4EF6\u5BF9\u5E94\u7684\u6837\u5F0F\uFF0C\u82E5\u7EC4\u4EF6\u6CA1\u6709\u6837\u5F0F\u6587\u4EF6\uFF0C\u5219\u65E0\u987B\u5F15\u5165</span>
-<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style&#39;</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/es/button/style/index&#39;</span>;
 </code></pre></div><div class="van-doc-card"><h3 id="fang-shi-si.-dao-ru-suo-you-zu-jian" tabindex="-1">\u65B9\u5F0F\u56DB. \u5BFC\u5165\u6240\u6709\u7EC4\u4EF6</h3><p>Vant \u652F\u6301\u4E00\u6B21\u6027\u5BFC\u5165\u6240\u6709\u7EC4\u4EF6\uFF0C\u5F15\u5165\u6240\u6709\u7EC4\u4EF6\u4F1A\u589E\u52A0\u4EE3\u7801\u5305\u4F53\u79EF\uFF0C\u56E0\u6B64\u4E0D\u63A8\u8350\u8FD9\u79CD\u505A\u6CD5\u3002</p><pre><code class="language-js"><span class="hljs-keyword">import</span> { createApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vue&#39;</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-title class_">Vant</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#39;vant&#39;</span>;
 <span class="hljs-keyword">import</span> <span class="hljs-string">&#39;vant/lib/index.css&#39;</span>;
