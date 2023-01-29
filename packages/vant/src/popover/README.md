@@ -30,7 +30,7 @@ app.use(Popover);
 
 ```js
 import { ref } from 'vue';
-import { Toast } from 'vant';
+import { showToast } from 'vant';
 
 export default {
   setup() {
@@ -40,7 +40,7 @@ export default {
       { text: 'Option 2' },
       { text: 'Option 3' },
     ];
-    const onSelect = (action) => Toast(action.text);
+    const onSelect = (action) => showToast(action.text);
 
     return {
       actions,
@@ -204,6 +204,41 @@ export default {
 };
 ```
 
+### Uncontrolled
+
+You can use Popover as a controlled or uncontrolled component:
+
+- When binding `v-model:show`, Popover is a controlled component, and the display of the component is completely controlled by the value of `v-model:show`.
+- When `v-model:show` is not used, Popover is an uncontrolled component. You can pass in a default value through the `show` prop, and the display is controlled by the component itself.
+
+```html
+<van-popover :actions="actions" position="top-start" @select="onSelect">
+  <template #reference>
+    <van-button type="primary">Uncontrolled</van-button>
+  </template>
+</van-popover>
+```
+
+```js
+import { ref } from 'vue';
+import { showToast } from 'vant';
+
+export default {
+  setup() {
+    const actions = [
+      { text: '选项一' },
+      { text: '选项二' },
+      { text: '选项三' },
+    ];
+    const onSelect = (action) => showToast(action.text);
+    return {
+      actions,
+      onSelect,
+    };
+  },
+};
+```
+
 ## API
 
 ### Props
@@ -213,8 +248,8 @@ export default {
 | v-model:show | Whether to show Popover | _boolean_ | `false` |
 | actions | Actions | _PopoverAction[]_ | `[]` |
 | placement | Placement | _PopoverPlacement_ | `bottom` |
-| theme | Theme，can be set to `dark` | _PopoverTheme_ | `light` |
-| trigger | Trigger mode，can be set to `manual` | _PopoverTrigger_ | `click` |
+| theme | Theme, can be set to `dark` | _PopoverTheme_ | `light` |
+| trigger | Trigger mode, can be set to `manual` | _PopoverTrigger_ | `click` |
 | duration | Transition duration, unit second | _number \| string_ | `0.3` |
 | offset | Distance to reference | _[number, number]_ | `[0, 8]` |
 | overlay | Whether to show overlay | _boolean_ | `false` |
@@ -279,15 +314,15 @@ The component provides the following CSS variables, which can be used to customi
 | Name | Default Value | Description |
 | --- | --- | --- |
 | --van-popover-arrow-size | _6px_ | - |
-| --van-popover-border-radius | _var(--van-border-radius-lg)_ | - |
+| --van-popover-radius | _var(--van-radius-lg)_ | - |
 | --van-popover-action-width | _128px_ | - |
 | --van-popover-action-height | _44px_ | - |
 | --van-popover-action-font-size | _var(--van-font-size-md)_ | - |
 | --van-popover-action-line-height | _var(--van-line-height-md)_ | - |
 | --van-popover-action-icon-size | _20px_ | - |
 | --van-popover-light-text-color | _var(--van-text-color)_ | - |
-| --van-popover-light-background-color | _var(--van-background-color-light)_ | - |
+| --van-popover-light-background | _var(--van-background-2)_ | - |
 | --van-popover-light-action-disabled-text-color | _var(--van-text-color-3)_ | - |
 | --van-popover-dark-text-color | _var(--van-white)_ | - |
-| --van-popover-dark-background-color | _#4a4a4a_ | - |
+| --van-popover-dark-background | _#4a4a4a_ | - |
 | --van-popover-dark-action-disabled-text-color | _var(--van-text-color-2)_ | - |

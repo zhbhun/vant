@@ -98,11 +98,26 @@ exports[`should render demo and match snapshot 1`] = `
        aria-checked="true"
   >
     <div class="van-checkbox__icon van-checkbox__icon--round van-checkbox__icon--checked">
-      <img src="https://img.yzcdn.cn/vant/user-active.png">
+      <img src="https://fastly.jsdelivr.net/npm/@vant/assets/user-active.png">
     </div>
     <span class="van-checkbox__label">
       Custom Icon
     </span>
+  </div>
+</div>
+<div>
+  <div role="checkbox"
+       class="van-checkbox"
+       tabindex="0"
+       aria-checked="false"
+  >
+    <span class="van-checkbox__label van-checkbox__label--left">
+      Left Label
+    </span>
+    <div class="van-checkbox__icon van-checkbox__icon--round">
+      <i class="van-badge__wrapper van-icon van-icon-success">
+      </i>
+    </div>
   </div>
 </div>
 <div>

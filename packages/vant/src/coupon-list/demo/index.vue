@@ -3,9 +3,9 @@ import VanCouponCell from '../../coupon-cell';
 import VanPopup from '../../popup';
 import VanCouponList from '..';
 import { ref, computed } from 'vue';
-import { useTranslate } from '../../../docs/site/use-translate';
+import { useTranslate } from '../../../docs/site';
 import { CouponInfo } from '../../coupon';
-import { Toast } from '../../toast';
+import { showToast } from '../../toast';
 
 const t = useTranslate({
   'zh-CN': {
@@ -85,7 +85,7 @@ const onChange = (index: number) => {
 };
 
 const onExchange = () => {
-  Toast(t('exchange'));
+  showToast(t('exchange'));
   exchangedCoupons.value.push({
     ...coupon.value,
     id: getRandomId(),

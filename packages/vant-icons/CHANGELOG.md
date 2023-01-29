@@ -1,5 +1,22 @@
 ## Changelog
 
+## 2.0.1
+
+- add woff format back to be compatible with some special webview
+
+## 2.0.0
+
+- no longer support woff/ttf format
+- fix delete / delete-o icon
+
+## 1.8.0
+
+- add qq icon
+- add weibo icon
+- add link-o icon
+- add miniprogram-o icon
+- add wechat-moments icon
+
 ## 1.7.3
 
 - complete https protocol

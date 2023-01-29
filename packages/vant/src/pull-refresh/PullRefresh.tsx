@@ -17,7 +17,7 @@ import {
 } from '../utils';
 
 // Composables
-import { useScrollParent } from '@vant/use';
+import { useEventListener, useScrollParent } from '@vant/use';
 import { useTouch } from '../composables/use-touch';
 
 // Components
@@ -35,7 +35,7 @@ type PullRefreshStatus =
   | 'pulling'
   | 'success';
 
-const pullRefreshProps = {
+export const pullRefreshProps = {
   disabled: Boolean,
   modelValue: Boolean,
   headHeight: makeNumericProp(DEFAULT_HEAD_HEIGHT),
@@ -55,12 +55,13 @@ export default defineComponent({
 
   props: pullRefreshProps,
 
-  emits: ['refresh', 'update:modelValue'],
+  emits: ['change', 'refresh', 'update:modelValue'],
 
   setup(props, { emit, slots }) {
     let reachTop: boolean;
 
     const root = ref<HTMLElement>();
+    const track = ref<HTMLElement>();
     const scrollParent = useScrollParent(root);
 
     const state = reactive({
@@ -111,6 +112,11 @@ export default defineComponent({
       } else {
         state.status = 'loosing';
       }
+
+      emit('change', {
+        status: state.status,
+        distance,
+      });
     };
 
     const getStatusText = () => {
@@ -215,6 +221,11 @@ export default defineComponent({
       }
     );
 
+    // useEventListener will set passive to `false` to eliminate the warning of Chrome
+    useEventListener('touchmove', onTouchMove, {
+      target: track,
+    });
+
     return () => {
       const trackStyle = {
         transitionDuration: `${state.duration}ms`,
@@ -226,10 +237,10 @@ export default defineComponent({
       return (
         <div ref={root} class={bem()}>
           <div
+            ref={track}
             class={bem('track')}
             style={trackStyle}
-            onTouchstart={onTouchStart}
-            onTouchmove={onTouchMove}
+            onTouchstartPassive={onTouchStart}
             onTouchend={onTouchEnd}
             onTouchcancel={onTouchEnd}
           >

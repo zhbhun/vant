@@ -80,6 +80,68 @@ export default {
 };
 ```
 
+### 中国省市区数据
+
+Cascader 组件常用于选择省市区，Vant 提供了一份中国省市区数据，你可以安装 [@vant/area-data](https://github.com/vant-ui/vant/tree/main/packages/vant-area-data) npm 包来引入：
+
+```bash
+# 通过 npm
+npm i @vant/area-data
+
+# 通过 yarn
+yarn add @vant/area-data
+
+# 通过 pnpm
+pnpm add @vant/area-data
+```
+
+```html
+<van-field
+  v-model="fieldValue"
+  is-link
+  readonly
+  label="地区"
+  placeholder="请选择所在地区"
+  @click="show = true"
+/>
+<van-popup v-model:show="show" round position="bottom">
+  <van-cascader
+    v-model="cascaderValue"
+    title="请选择所在地区"
+    :options="options"
+    @close="show = false"
+    @finish="onFinish"
+  />
+</van-popup>
+```
+
+```js
+import { ref } from 'vue';
+import { useCascaderAreaData } from '@vant/area-data';
+
+export default {
+  setup() {
+    const show = ref(false);
+    const fieldValue = ref('');
+    const cascaderValue = ref('');
+    const options = useCascaderAreaData();
+    const onFinish = ({ selectedOptions }) => {
+      show.value = false;
+      fieldValue.value = selectedOptions.map((option) => option.text).join('/');
+    };
+    return {
+      show,
+      options,
+      onFinish,
+      fieldValue,
+      cascaderValue,
+    };
+  },
+};
+```
+
+> Tips: 中国的行政区划每年都会有变动，如果发现省市区数据未及时更新，欢迎提 Pull Request 帮助我们更新。你可以在[「国家统计局 - 全国区划代码」](http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/) 和[「民政部 - 行政区划代码」](https://www.mca.gov.cn/article/sj/xzqh/1980/)上查询到最新数据，请根据官方数据进行核实。
+
 ### 自定义颜色
 
 通过 `active-color` 属性来设置选中状态的高亮颜色。
@@ -89,7 +151,7 @@ export default {
   v-model="cascaderValue"
   title="请选择所在地区"
   :options="options"
-  active-color="#1989fa"
+  active-color="#ee0a24"
   @close="show = false"
   @finish="onFinish"
 />
@@ -212,13 +274,15 @@ export default {
 ```html
 <van-cascader v-model="code" title="请选择所在地区" :options="options">
   <template #options-top="{ tabIndex }">
-    <div class="current-level">当前为第 {{ tabIndex }} 级</div>
+    <div class="current-level">当前为第 {{ tabIndex + 1 }} 级</div>
   </template>
 </van-cascader>
 
 <style>
   .current-level {
-    padding: 10px 16px 0;
+    font-size: 14px;
+    padding: 16px 16px 0;
+    color: var(--van-gray-6);
   }
 </style>
 ```
@@ -260,12 +324,12 @@ export default {
 | value | 选中项的值 | _string \| number_ | - |
 | options | 可选项数据源 | _CascaderOption[]_ | `[]` |
 | placeholder | 未选中时的提示文案 | _string_ | `请选择` |
-| active-color | 选中状态的高亮颜色 | _string_ | `#ee0a24` |
+| active-color | 选中状态的高亮颜色 | _string_ | `#1989fa` |
 | swipeable `v3.0.11` | 是否开启手势左右滑动切换 | _boolean_ | `false` |
 | closeable | 是否显示关闭图标 | _boolean_ | `true` |
 | show-header `v3.4.2` | 是否展示标题栏 | _boolean_ | `true` |
 | close-icon `v3.0.10` | 关闭图标名称或图片链接，等同于 Icon 组件的 [name 属性](#/zh-CN/icon#props) | _string_ | `cross` |
-| field-names `v3.0.4` | 自定义 `options` 结构中的字段 | _object_ | `{ text: 'text', value: 'value', children: 'children' }` |
+| field-names `v3.0.4` | 自定义 `options` 结构中的字段 | _CascaderFieldNames_ | `{ text: 'text', value: 'value', children: 'children' }` |
 
 ### CascaderOption 数据结构
 

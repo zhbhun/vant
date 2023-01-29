@@ -2,9 +2,13 @@ export default {
   name: 'vant',
   build: {
     srcDir: 'src',
+    tagPrefix: 'van-',
     namedExport: true,
     skipInstall: ['lazyload'],
     packageManager: 'pnpm',
+    extensions: {
+      esm: '.mjs',
+    },
     site: {
       publicPath:
         (typeof window === 'undefined' && process.env.PUBLIC_PATH) || '/vant/',
@@ -12,56 +16,46 @@ export default {
     vetur: {
       tagPrefix: 'van-',
     },
+    css: {
+      removeSourceFile: true,
+    },
   },
   site: {
     defaultLang: 'en-US',
+    darkModeClass: 'van-theme-dark',
+    lightModeClass: 'van-theme-light',
+    enableVConsole: false,
     versions: [
       { label: 'v1', link: '/vant/v1/' },
       { label: 'v2', link: '/vant/v2/' },
-      { label: 'v4', link: '/vant/v4/' },
+      { label: 'v3', link: '/vant/v3/' },
     ],
     baiduAnalytics: {
-      seed: 'ad6b5732c36321f2dafed737ac2da92f',
+      seed: 'af5d41bc4e446e76665dbe3ec18d55c3',
     },
-    htmlMeta: {
-      'docsearch:version': 'v3',
-    },
+    headHtml: `<script>
+if (location.host === 'youzan.github.io') {
+location.href = location.href.replace('youzan.github.io', 'vant-ui.github.io');
+}
+</script>
+`,
     locales: {
       'zh-CN': {
-        title: 'Vant 3',
+        title: 'Vant 4',
         subtitle: '（适用于 Vue 3）',
         description: '轻量、可靠的移动端组件库',
-        logo: 'https://img.yzcdn.cn/vant/logo.png',
+        logo: 'https://fastly.jsdelivr.net/npm/@vant/assets/logo.png',
         langLabel: '中',
         links: [
           {
-            logo: 'https://b.yzcdn.cn/vant/logo/weapp.svg',
+            logo: 'https://fastly.jsdelivr.net/npm/@vant/assets/weapp.svg',
             url: 'https://vant-contrib.gitee.io/vant-weapp/',
           },
           {
-            logo: 'https://b.yzcdn.cn/vant/logo/github.svg',
-            url: 'https://github.com/youzan/vant',
+            logo: 'https://fastly.jsdelivr.net/npm/@vant/assets/github.svg',
+            url: 'https://github.com/vant-ui/vant',
           },
         ],
-        searchConfig: {
-          apiKey: '90067aecdaa2c85220e2783cd305caac',
-          indexName: 'vant',
-          searchParameters: {
-            facetFilters: ['lang:zh-CN', 'version:v3'],
-          },
-          transformItems(items) {
-            if (location.hostname !== 'youzan.github.io') {
-              items.forEach((item) => {
-                if (item.url) {
-                  item.url =
-                    item.url &&
-                    item.url.replace('youzan.github.io', location.hostname);
-                }
-              });
-            }
-            return items;
-          },
-        },
         nav: [
           {
             title: '开发指南',
@@ -87,8 +81,16 @@ export default {
                 title: '更新日志',
               },
               {
+                path: 'release-note-v4',
+                title: '4.0 更新介绍',
+              },
+              {
                 path: 'migrate-from-v2',
-                title: '从 v2 升级',
+                title: '从 v2 升级到 v3',
+              },
+              {
+                path: 'migrate-from-v3',
+                title: '从 v3 升级到 v4',
               },
               {
                 path: 'contribution',
@@ -97,10 +99,6 @@ export default {
               {
                 path: 'design',
                 title: '设计资源',
-              },
-              {
-                path: 'style-guide',
-                title: '风格指南',
               },
               {
                 path: 'locale',
@@ -140,6 +138,10 @@ export default {
                 title: 'Popup 弹出层',
               },
               {
+                path: 'space',
+                title: 'Space 间距',
+              },
+              {
                 path: 'style',
                 title: 'Style 内置样式',
               },
@@ -165,8 +167,8 @@ export default {
                 title: 'Checkbox 复选框',
               },
               {
-                path: 'datetime-picker',
-                title: 'DatetimePicker 时间选择',
+                path: 'date-picker',
+                title: 'DatePicker 日期选择',
               },
               {
                 path: 'field',
@@ -187,6 +189,10 @@ export default {
               {
                 path: 'picker',
                 title: 'Picker 选择器',
+              },
+              {
+                path: 'picker-group',
+                title: 'PickerGroup 选择器组',
               },
               {
                 path: 'radio',
@@ -211,6 +217,10 @@ export default {
               {
                 path: 'switch',
                 title: 'Switch 开关',
+              },
+              {
+                path: 'time-picker',
+                title: 'TimePicker 时间选择',
               },
               {
                 path: 'uploader',
@@ -371,6 +381,10 @@ export default {
                 path: 'tree-select',
                 title: 'TreeSelect 分类选择',
               },
+              {
+                path: 'back-top',
+                title: 'BackTop 回到顶部',
+              },
             ],
           },
           {
@@ -463,36 +477,20 @@ export default {
               },
             ],
           },
-          {
-            title: '废弃',
-            items: [
-              {
-                path: 'theme',
-                title: '定制主题',
-              },
-            ],
-          },
         ],
       },
       'en-US': {
-        title: 'Vant 3',
+        title: 'Vant 4',
         subtitle: ' (for Vue 3)',
-        description: 'Mobile UI Components built on Vue',
-        logo: 'https://img.yzcdn.cn/vant/logo.png',
+        description: 'Lightweight Mobile UI Components built on Vue',
+        logo: 'https://fastly.jsdelivr.net/npm/@vant/assets/logo.png',
         langLabel: 'EN',
         links: [
           {
-            logo: 'https://b.yzcdn.cn/vant/logo/github.svg',
-            url: 'https://github.com/youzan/vant',
+            logo: 'https://fastly.jsdelivr.net/npm/@vant/assets/github.svg',
+            url: 'https://github.com/vant-ui/vant',
           },
         ],
-        searchConfig: {
-          apiKey: '90067aecdaa2c85220e2783cd305caac',
-          indexName: 'vant',
-          searchParameters: {
-            facetFilters: ['lang:en-US', 'version:v3'],
-          },
-        },
         nav: [
           {
             title: 'Essentials',
@@ -510,8 +508,28 @@ export default {
                 title: 'Advanced Usage',
               },
               {
+                path: 'faq',
+                title: 'FAQ',
+              },
+              {
                 path: 'changelog',
                 title: 'Changelog',
+              },
+              {
+                path: 'release-note-v4',
+                title: '4.0 Release Note',
+              },
+              {
+                path: 'migrate-from-v2',
+                title: 'Upgrade from v2 to v3',
+              },
+              {
+                path: 'migrate-from-v3',
+                title: 'Upgrade from v3 to v4',
+              },
+              {
+                path: 'contribution',
+                title: 'Contribution Guide',
               },
               {
                 path: 'design',
@@ -555,6 +573,10 @@ export default {
                 title: 'Popup',
               },
               {
+                path: 'space',
+                title: 'Space',
+              },
+              {
                 path: 'style',
                 title: 'Built-in style',
               },
@@ -580,8 +602,8 @@ export default {
                 title: 'Checkbox',
               },
               {
-                path: 'datetime-picker',
-                title: 'DatetimePicker',
+                path: 'date-picker',
+                title: 'DatePicker',
               },
               {
                 path: 'field',
@@ -602,6 +624,10 @@ export default {
               {
                 path: 'picker',
                 title: 'Picker',
+              },
+              {
+                path: 'picker-group',
+                title: 'PickerGroup',
               },
               {
                 path: 'radio',
@@ -626,6 +652,10 @@ export default {
               {
                 path: 'switch',
                 title: 'Switch',
+              },
+              {
+                path: 'time-picker',
+                title: 'TimePicker',
               },
               {
                 path: 'uploader',
@@ -786,6 +816,10 @@ export default {
                 path: 'tree-select',
                 title: 'TreeSelect',
               },
+              {
+                path: 'back-top',
+                title: 'BackTop',
+              },
             ],
           },
           {
@@ -852,38 +886,29 @@ export default {
                 path: 'use-event-listener',
                 title: 'useEventListener',
               },
-              // {
-              //   path: 'use-page-visibility',
-              //   title: 'usePageVisibility',
-              // },
-              // {
-              //   path: 'use-rect',
-              //   title: 'useRect',
-              // },
-              // {
-              //   path: 'use-relation',
-              //   title: 'useRelation',
-              // },
-              // {
-              //   path: 'use-scroll-parent',
-              //   title: 'useScrollParent',
-              // },
+              {
+                path: 'use-page-visibility',
+                title: 'usePageVisibility',
+              },
+              {
+                path: 'use-rect',
+                title: 'useRect',
+              },
+              {
+                path: 'use-relation',
+                title: 'useRelation',
+              },
+              {
+                path: 'use-scroll-parent',
+                title: 'useScrollParent',
+              },
               {
                 path: 'use-toggle',
                 title: 'useToggle',
               },
-              // {
-              //   path: 'use-window-size',
-              //   title: 'useWindowSize',
-              // },
-            ],
-          },
-          {
-            title: 'Deprecated',
-            items: [
               {
-                path: 'theme',
-                title: 'Custom Theme',
+                path: 'use-window-size',
+                title: 'useWindowSize',
               },
             ],
           },

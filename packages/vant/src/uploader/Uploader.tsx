@@ -11,20 +11,20 @@ import {
 import {
   pick,
   extend,
+  toArray,
   isPromise,
   truthProp,
-  numericProp,
   Interceptor,
   getSizeStyle,
   makeArrayProp,
   makeStringProp,
   makeNumericProp,
+  type Numeric,
   type ComponentInstance,
 } from '../utils';
 import {
   bem,
   name,
-  toArray,
   isOversize,
   filterFiles,
   isImageFile,
@@ -37,7 +37,7 @@ import { useExpose } from '../composables/use-expose';
 
 // Components
 import { Icon } from '../icon';
-import { ImagePreview, type ImagePreviewOptions } from '../image-preview';
+import { showImagePreview, type ImagePreviewOptions } from '../image-preview';
 import UploaderPreviewItem from './UploaderPreviewItem';
 
 // Types
@@ -51,7 +51,7 @@ import type {
   UploaderFileListItem,
 } from './types';
 
-const uploaderProps = {
+export const uploaderProps = {
   name: makeNumericProp(''),
   accept: makeStringProp('image/*'),
   capture: String,
@@ -70,9 +70,11 @@ const uploaderProps = {
   modelValue: makeArrayProp<UploaderFileListItem>(),
   beforeRead: Function as PropType<UploaderBeforeRead>,
   beforeDelete: Function as PropType<Interceptor>,
-  previewSize: numericProp,
+  previewSize: [Number, String, Array] as PropType<
+    Numeric | [Numeric, Numeric]
+  >,
   previewImage: truthProp,
-  previewOptions: Object as PropType<ImagePreviewOptions>,
+  previewOptions: Object as PropType<Partial<ImagePreviewOptions>>,
   previewFullImage: truthProp,
   maxSize: {
     type: [Number, String, Function] as PropType<UploaderMaxSize>,
@@ -90,9 +92,9 @@ export default defineComponent({
   emits: [
     'delete',
     'oversize',
-    'click-upload',
-    'close-preview',
-    'click-preview',
+    'clickUpload',
+    'closePreview',
+    'clickPreview',
     'update:modelValue',
   ],
 
@@ -221,14 +223,14 @@ export default defineComponent({
 
     let imagePreview: ComponentInstance | undefined;
 
-    const onClosePreview = () => emit('close-preview');
+    const onClosePreview = () => emit('closePreview');
 
     const previewImage = (item: UploaderFileListItem) => {
       if (props.previewFullImage) {
         const imageFiles = props.modelValue.filter(isImageFile);
         const images = imageFiles
           .map((item) => {
-            if (item.file && !item.url) {
+            if (item.file && !item.url && item.status !== 'failed') {
               item.url = URL.createObjectURL(item.file);
               urls.push(item.url);
             }
@@ -236,7 +238,7 @@ export default defineComponent({
           })
           .filter(Boolean) as string[];
 
-        imagePreview = ImagePreview(
+        imagePreview = showImagePreview(
           extend(
             {
               images,
@@ -278,10 +280,10 @@ export default defineComponent({
 
       return (
         <UploaderPreviewItem
-          v-slots={{ 'preview-cover': slots['preview-cover'] }}
+          v-slots={pick(slots, ['preview-cover', 'preview-delete'])}
           item={item}
           index={index}
-          onClick={() => emit('click-preview', item, getDetail(index))}
+          onClick={() => emit('clickPreview', item, getDetail(index))}
           onDelete={() => deleteFile(item, index)}
           onPreview={() => previewImage(item)}
           {...pick(props, ['name', 'lazyLoad'])}
@@ -296,10 +298,10 @@ export default defineComponent({
       }
     };
 
-    const onClickUpload = (event: MouseEvent) => emit('click-upload', event);
+    const onClickUpload = (event: MouseEvent) => emit('clickUpload', event);
 
     const renderUpload = () => {
-      if (props.modelValue.length >= props.maxCount || !props.showUpload) {
+      if (props.modelValue.length >= props.maxCount) {
         return;
       }
 
@@ -327,6 +329,7 @@ export default defineComponent({
 
       return (
         <div
+          v-show={props.showUpload}
           class={bem('upload', { readonly: props.readonly })}
           style={getSizeStyle(props.previewSize)}
           onClick={onClickUpload}

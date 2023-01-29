@@ -23,7 +23,11 @@ app.use(VanImage);
 基础用法与原生 `img` 标签一致，可以设置 `src`、`width`、`height`、`alt` 等原生属性。
 
 ```html
-<van-image width="100" height="100" src="https://img.yzcdn.cn/vant/cat.jpeg" />
+<van-image
+  width="100"
+  height="100"
+  src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
+/>
 ```
 
 ### 填充模式
@@ -35,7 +39,7 @@ app.use(VanImage);
   width="10rem"
   height="10rem"
   fit="contain"
-  src="https://img.yzcdn.cn/vant/cat.jpeg"
+  src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
 />
 ```
 
@@ -49,7 +53,7 @@ app.use(VanImage);
   height="10rem"
   fit="cover"
   position="left"
-  src="https://img.yzcdn.cn/vant/cat.jpeg"
+  src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
 />
 ```
 
@@ -62,7 +66,7 @@ app.use(VanImage);
   round
   width="10rem"
   height="10rem"
-  src="https://img.yzcdn.cn/vant/cat.jpeg"
+  src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
 />
 ```
 
@@ -75,7 +79,7 @@ app.use(VanImage);
   width="100"
   height="100"
   lazy-load
-  src="https://img.yzcdn.cn/vant/cat.jpeg"
+  src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
 />
 ```
 
@@ -92,7 +96,7 @@ app.use(Lazyload);
 `Image` 组件提供了默认的加载中提示，支持通过 `loading` 插槽自定义内容。
 
 ```html
-<van-image src="https://img.yzcdn.cn/vant/cat.jpeg">
+<van-image src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg">
   <template v-slot:loading>
     <van-loading type="spinner" size="20" />
   </template>
@@ -104,7 +108,7 @@ app.use(Lazyload);
 `Image` 组件提供了默认的加载失败提示，支持通过 `error` 插槽自定义内容。
 
 ```html
-<van-image src="https://img.yzcdn.cn/vant/cat.jpeg">
+<van-image src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg">
   <template v-slot:error>加载失败</template>
 </van-image>
 ```
@@ -123,6 +127,7 @@ app.use(Lazyload);
 | height | 高度，默认单位为 `px` | _number \| string_ | - |
 | radius | 圆角大小，默认单位为 `px` | _number \| string_ | `0` |
 | round | 是否显示为圆形 | _boolean_ | `false` |
+| block `3.6.3` | 是否将根节点设置为块级元素，默认情况下为 `inline-block` 元素 | _boolean_ | `false` |
 | lazy-load | 是否开启图片懒加载，须配合 [Lazyload](#/zh-CN/lazyload) 组件使用 | _boolean_ | `false` |
 | show-error | 是否展示图片加载失败提示 | _boolean_ | `true` |
 | show-loading | 是否展示图片加载中提示 | _boolean_ | `true` |
@@ -146,7 +151,7 @@ app.use(Lazyload);
 | 事件名 | 说明               | 回调参数            |
 | ------ | ------------------ | ------------------- |
 | click  | 点击图片时触发     | _event: MouseEvent_ |
-| load   | 图片加载完毕时触发 | -                   |
+| load   | 图片加载完毕时触发 | _event: Event_      |
 | error  | 图片加载失败时触发 | -                   |
 
 ### Slots
@@ -171,15 +176,15 @@ import type { ImageFit, ImagePosition, ImageProps } from 'vant';
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider 组件](#/zh-CN/config-provider)。
 
-| 名称 | 默认值 | 描述 |
-| --- | --- | --- |
-| --van-image-placeholder-text-color | _var(--van-text-color-2)_ | - |
-| --van-image-placeholder-font-size | _var(--van-font-size-md)_ | - |
-| --van-image-placeholder-background-color | _var(--van-background-color)_ | - |
-| --van-image-loading-icon-size | _32px_ | - |
-| --van-image-loading-icon-color | _var(--van-gray-4)_ | - |
-| --van-image-error-icon-size | _32px_ | - |
-| --van-image-error-icon-color | _var(--van-gray-4)_ | - |
+| 名称                               | 默认值                    | 描述 |
+| ---------------------------------- | ------------------------- | ---- |
+| --van-image-placeholder-text-color | _var(--van-text-color-2)_ | -    |
+| --van-image-placeholder-font-size  | _var(--van-font-size-md)_ | -    |
+| --van-image-placeholder-background | _var(--van-background)_   | -    |
+| --van-image-loading-icon-size      | _32px_                    | -    |
+| --van-image-loading-icon-color     | _var(--van-gray-4)_       | -    |
+| --van-image-error-icon-size        | _32px_                    | -    |
+| --van-image-error-icon-color       | _var(--van-gray-4)_       | -    |
 
 ## 常见问题
 

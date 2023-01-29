@@ -70,6 +70,40 @@ test('should support message function in rules prop', async () => {
   });
 });
 
+test('should skip pattern if validateEmpty is false in rules prop', async () => {
+  const onFailed = jest.fn();
+  const rules: FieldRule[] = [{ pattern: /\d{6}/, validateEmpty: false }];
+  const wrapper = mount({
+    render() {
+      return (
+        <Form onFailed={onFailed}>
+          <Field name="A" rules={rules} modelValue="" />
+        </Form>
+      );
+    },
+  });
+
+  await submitForm(wrapper);
+  expect(onFailed).toHaveBeenCalledTimes(0);
+});
+
+test('should skip validator if validateEmpty is false in rules prop', async () => {
+  const onFailed = jest.fn();
+  const rules: FieldRule[] = [{ validator: () => false, validateEmpty: false }];
+  const wrapper = mount({
+    render() {
+      return (
+        <Form onFailed={onFailed}>
+          <Field name="A" rules={rules} modelValue="" />
+        </Form>
+      );
+    },
+  });
+
+  await submitForm(wrapper);
+  expect(onFailed).toHaveBeenCalledTimes(0);
+});
+
 test('should support formatter in rules prop', async () => {
   const onFailed = jest.fn();
   const rules: FieldRule[] = [
@@ -285,6 +319,43 @@ test('should trigger validate after inputting when validate-trigger prop is onCh
 
   await input.trigger('blur');
   expect(wrapper.find('.van-field__error-message').exists()).toBeFalsy();
+
+  await wrapper.setData({ value: '1' });
+  expect(wrapper.find('.van-field__error-message').exists()).toBeFalsy();
+
+  await wrapper.setData({ value: '' });
+  expect(wrapper.find('.van-field__error-message').exists).toBeTruthy();
+});
+
+test('should trigger validate correctly when validate-trigger prop is array', async () => {
+  const wrapper = mount({
+    data() {
+      return {
+        ...getSimpleRules(),
+        value: '',
+      };
+    },
+    render() {
+      return (
+        <Form ref="form" validateTrigger={['onBlur', 'onChange']}>
+          <Field
+            v-model={this.value}
+            name="A"
+            rules={this.rulesA}
+            modelValue=""
+          />
+        </Form>
+      );
+    },
+  });
+
+  const input = wrapper.find('input');
+
+  await input.trigger('input');
+  expect(wrapper.find('.van-field__error-message').exists()).toBeFalsy();
+
+  await input.trigger('blur');
+  expect(wrapper.find('.van-field__error-message').exists()).toBeTruthy();
 
   await wrapper.setData({ value: '1' });
   expect(wrapper.find('.van-field__error-message').exists()).toBeFalsy();

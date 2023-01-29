@@ -14,6 +14,7 @@ import {
   makeStringProp,
   createNamespace,
   HAPTICS_FEEDBACK,
+  type Numeric,
 } from '../utils';
 
 // Components
@@ -27,7 +28,7 @@ import type { CascaderTab, CascaderOption, CascaderFieldNames } from './types';
 
 const [name, bem, t] = createNamespace('cascader');
 
-const cascaderProps = {
+export const cascaderProps = {
   title: String,
   options: makeArrayProp<CascaderOption>(),
   closeable: truthProp,
@@ -47,7 +48,7 @@ export default defineComponent({
 
   props: cascaderProps,
 
-  emits: ['close', 'change', 'finish', 'click-tab', 'update:modelValue'],
+  emits: ['close', 'change', 'finish', 'clickTab', 'update:modelValue'],
 
   setup(props, { slots, emit }) {
     const tabs = ref<CascaderTab[]>([]);
@@ -68,7 +69,7 @@ export default defineComponent({
 
     const getSelectedOptionsByValue = (
       options: CascaderOption[],
-      value: string | number
+      value: Numeric
     ): CascaderOption[] | undefined => {
       for (const option of options) {
         if (option[valueKey] === value) {
@@ -184,7 +185,7 @@ export default defineComponent({
     const onClose = () => emit('close');
 
     const onClickTab = ({ name, title }: TabsClickTabEventParams) =>
-      emit('click-tab', name, title);
+      emit('clickTab', name, title);
 
     const renderHeader = () =>
       props.showHeader ? (
@@ -276,7 +277,7 @@ export default defineComponent({
         class={bem('tabs')}
         color={props.activeColor}
         swipeable={props.swipeable}
-        onClick-tab={onClickTab}
+        onClickTab={onClickTab}
       >
         {tabs.value.map(renderTab)}
       </Tabs>

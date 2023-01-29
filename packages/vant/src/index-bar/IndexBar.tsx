@@ -25,6 +25,7 @@ import {
   createNamespace,
   getRootScrollTop,
   setRootScrollTop,
+  type Numeric,
 } from '../utils';
 
 // Composables
@@ -51,14 +52,14 @@ function genAlphabet() {
 
 const [name, bem] = createNamespace('index-bar');
 
-const indexBarProps = {
+export const indexBarProps = {
   sticky: truthProp,
   zIndex: numericProp,
   teleport: [String, Object] as PropType<TeleportProps['to']>,
   highlightColor: String,
   stickyOffsetTop: makeNumberProp(0),
   indexList: {
-    type: Array as PropType<Array<string | number>>,
+    type: Array as PropType<Numeric[]>,
     default: genAlphabet,
   },
 };
@@ -76,7 +77,8 @@ export default defineComponent({
 
   setup(props, { emit, slots }) {
     const root = ref<HTMLElement>();
-    const activeAnchor = ref<string | number>('');
+    const sidebar = ref<HTMLElement>();
+    const activeAnchor = ref<Numeric>('');
 
     const touch = useTouch();
     const scrollParent = useScrollParent(root);
@@ -181,7 +183,10 @@ export default defineComponent({
       nextTick(onScroll);
     };
 
-    useEventListener('scroll', onScroll, { target: scrollParent });
+    useEventListener('scroll', onScroll, {
+      target: scrollParent,
+      passive: true,
+    });
 
     onMounted(init);
 
@@ -207,7 +212,7 @@ export default defineComponent({
         );
       });
 
-    const scrollTo = (index: string | number) => {
+    const scrollTo = (index: Numeric) => {
       selectActiveIndex = String(index);
       const match = getMatchAnchor(selectActiveIndex);
 
@@ -216,12 +221,12 @@ export default defineComponent({
         const scrollParentRect = useRect(scrollParent);
         const { offsetHeight } = document.documentElement;
 
+        match.$el.scrollIntoView();
+
         if (scrollTop === offsetHeight - scrollParentRect.height) {
           onScroll();
           return;
         }
-
-        match.$el.scrollIntoView();
 
         if (props.sticky && props.stickyOffsetTop) {
           setRootScrollTop(getRootScrollTop() - props.stickyOffsetTop);
@@ -268,17 +273,22 @@ export default defineComponent({
 
     const renderSidebar = () => (
       <div
+        ref={sidebar}
         class={bem('sidebar')}
         style={sidebarStyle.value}
         onClick={onClickSidebar}
-        onTouchstart={touch.start}
-        onTouchmove={onTouchMove}
+        onTouchstartPassive={touch.start}
       >
         {renderIndexes()}
       </div>
     );
 
     useExpose({ scrollTo });
+
+    // useEventListener will set passive to `false` to eliminate the warning of Chrome
+    useEventListener('touchmove', onTouchMove, {
+      target: sidebar,
+    });
 
     return () => (
       <div ref={root} class={bem()}>

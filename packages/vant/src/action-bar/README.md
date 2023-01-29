@@ -32,12 +32,12 @@ app.use(ActionBarButton);
 ```
 
 ```js
-import { Toast } from 'vant';
+import { showToast } from 'vant';
 
 export default {
   setup() {
-    const onClickIcon = () => Toast('Click Icon');
-    const onClickButton = () => Toast('Click Button');
+    const onClickIcon = () => showToast('Click Icon');
+    const onClickButton = () => showToast('Click Button');
     return {
       onClickIcon,
       onClickButton,
@@ -90,6 +90,7 @@ Use `badge` prop to show badge in icon.
 | Attribute | Description | Type | Default |
 | --- | --- | --- | --- |
 | safe-area-inset-bottom | Whether to enable bottom safe area adaptation | _boolean_ | `true` |
+| placeholder `v3.5.1` | Whether to generate a placeholder element | _boolean_ | `false` |
 
 ### ActionBarIcon Props
 
@@ -102,7 +103,7 @@ Use `badge` prop to show badge in icon.
 | icon-prefix `v3.0.17` | Icon className prefix | _string_ | `van-icon` |
 | dot | Whether to show red dot | _boolean_ | - |
 | badge | Content of the badge | _number \| string_ | - |
-| badge-props `v3.2.8` | Props of Badge，see [Badge - props](#/en-US/badge#props) | _BadgeProps_ | - |
+| badge-props `v3.2.8` | Props of Badge, see [Badge - props](#/en-US/badge#props) | _BadgeProps_ | - |
 | url | Link URL | _string_ | - |
 | to | Target route of the link, same as to of vue-router | _string \| object_ | - |
 | replace | If true, the navigation will not leave a history record | _boolean_ | `false` |
@@ -154,7 +155,7 @@ The component provides the following CSS variables, which can be used to customi
 
 | Name | Default Value | Description |
 | --- | --- | --- |
-| --van-action-bar-background-color | _var(--van-background-color-light)_ | - |
+| --van-action-bar-background | _var(--van-background-2)_ | - |
 | --van-action-bar-height | _50px_ | - |
 | --van-action-bar-icon-width | _48px_ | - |
 | --van-action-bar-icon-height | _100%_ | - |
@@ -162,8 +163,8 @@ The component provides the following CSS variables, which can be used to customi
 | --van-action-bar-icon-size | _18px_ | - |
 | --van-action-bar-icon-font-size | _var(--van-font-size-xs)_ | - |
 | --van-action-bar-icon-active-color | _var(--van-active-color)_ | - |
-| --van-action-bar-icon-text-color | _var(--van-gray-7)_ | - |
-| --van-action-bar-icon-background-color | _var(--van-background-color-light)_ | - |
+| --van-action-bar-icon-text-color | _var(--van-text-color)_ | - |
+| --van-action-bar-icon-background | _var(--van-background-2)_ | - |
 | --van-action-bar-button-height | _40px_ | - |
 | --van-action-bar-button-warning-color | _var(--van-gradient-orange)_ | - |
 | --van-action-bar-button-danger-color | _var(--van-gradient-red)_ | - |

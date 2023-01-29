@@ -5,7 +5,7 @@ import VanButton from '../../button';
 import VanCellGroup from '../../cell-group';
 import VanCell from '../../cell';
 import { ref, reactive } from 'vue';
-import { useTranslate } from '../../../docs/site/use-translate';
+import { cdnURL, useTranslate } from '../../../docs/site';
 import { useRefs } from '../../composables/use-refs';
 import type { CheckboxInstance } from '../types';
 import type { CheckboxGroupInstance } from '../../checkbox-group';
@@ -17,6 +17,7 @@ const t = useTranslate({
     customIconSize: '自定义大小',
     customColor: '自定义颜色',
     customShape: '自定义形状',
+    leftLabel: '左侧文本',
     title3: '复选框组',
     title4: '限制最大可选数',
     title5: '搭配单元格组件使用',
@@ -32,6 +33,7 @@ const t = useTranslate({
     customIconSize: 'Custom Icon Size',
     customColor: 'Custom Color',
     customShape: 'Custom Shape',
+    leftLabel: 'Left Label',
     title3: 'Checkbox Group',
     title4: 'Maximum amount of checked options',
     title5: 'Inside a Cell',
@@ -49,7 +51,8 @@ const state = reactive({
   checkbox3: true,
   checkboxShape: true,
   checkboxLabel: true,
-  checboxIcon: true,
+  checkboxIcon: true,
+  leftLabel: false,
   list: ['a', 'b'],
   result: ['a', 'b'],
   result2: [],
@@ -58,8 +61,8 @@ const state = reactive({
   horizontalResult: [],
 });
 
-const activeIcon = 'https://img.yzcdn.cn/vant/user-active.png';
-const inactiveIcon = 'https://img.yzcdn.cn/vant/user-inactive.png';
+const activeIcon = cdnURL('user-active.png');
+const inactiveIcon = cdnURL('user-inactive.png');
 
 const group = ref<CheckboxGroupInstance>();
 const [refs, setRefs] = useRefs<CheckboxInstance>();
@@ -104,7 +107,7 @@ const toggleAll = () => {
   </demo-block>
 
   <demo-block :title="t('customIconSize')">
-    <van-checkbox v-model="state.checboxIcon" icon-size="24px">
+    <van-checkbox v-model="state.checkboxIcon" icon-size="24px">
       {{ t('customIconSize') }}
     </van-checkbox>
   </demo-block>
@@ -115,6 +118,12 @@ const toggleAll = () => {
       <template #icon="{ checked }">
         <img :src="checked ? activeIcon : inactiveIcon" />
       </template>
+    </van-checkbox>
+  </demo-block>
+
+  <demo-block :title="t('leftLabel')">
+    <van-checkbox v-model="state.leftLabel" label-position="left">
+      {{ t('leftLabel') }}
     </van-checkbox>
   </demo-block>
 

@@ -1,4 +1,5 @@
 import type { ComponentPublicInstance, ComputedRef, Ref } from 'vue';
+import type { Numeric } from '../utils';
 import type { CalendarProps } from './Calendar';
 import type { CalendarMonthProps } from './CalendarMonth';
 
@@ -18,7 +19,7 @@ export type CalendarDayType =
 
 export type CalendarDayItem = {
   date?: Date;
-  text?: string | number;
+  text?: Numeric;
   type?: CalendarDayType;
   topInfo?: string;
   className?: unknown;
@@ -28,6 +29,7 @@ export type CalendarDayItem = {
 export type CalendarExpose = {
   reset: (date?: Date | Date[]) => void;
   scrollToDate: (targetDate: Date) => void;
+  getSelectedDate: () => Date | Date[] | null;
 };
 
 export type CalendarInstance = ComponentPublicInstance<
@@ -46,3 +48,32 @@ export type CalendarMonthInstance = ComponentPublicInstance<
     disabledDays: Ref<ComputedRef<CalendarDayItem[]>>;
   }
 >;
+
+export type CalendarThemeVars = {
+  calendarBackground?: string;
+  calendarPopupHeight?: string;
+  calendarHeaderShadow?: string;
+  calendarHeaderTitleHeight?: string;
+  calendarHeaderTitleFontSize?: string;
+  calendarHeaderSubtitleFontSize?: string;
+  calendarWeekdaysHeight?: string;
+  calendarWeekdaysFontSize?: string;
+  calendarMonthTitleFontSize?: string;
+  calendarMonthMarkColor?: string;
+  calendarMonthMarkFontSize?: string;
+  calendarDayHeight?: string;
+  calendarDayFontSize?: string;
+  calendarDayMarginBottom?: string;
+  calendarRangeEdgeColor?: string;
+  calendarRangeEdgeBackground?: string;
+  calendarRangeMiddleColor?: string;
+  calendarRangeMiddleBackgroundOpacity?: number | string;
+  calendarSelectedDaySize?: string;
+  calendarSelectedDayColor?: string;
+  calendarInfoFontSize?: string;
+  calendarInfoLineHeight?: number | string;
+  calendarSelectedDayBackground?: string;
+  calendarDayDisabledColor?: string;
+  calendarConfirmButtonHeight?: string;
+  calendarConfirmButtonMargin?: string;
+};

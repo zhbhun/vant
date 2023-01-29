@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import VanPopover, { PopoverPlacement } from '..';
+import VanPopover, { type PopoverPlacement } from '..';
 import VanButton from '../../button';
 import VanField from '../../field';
 import VanPopup from '../../popup';
-import VanPicker from '../../picker';
+import VanPicker, {
+  PickerConfirmEventParams,
+  type PickerOption,
+} from '../../picker';
 import VanGrid from '../../grid';
 import VanGridItem from '../../grid-item';
-import { Toast } from '../../toast';
-import { useTranslate } from '../../../docs/site/use-translate';
+import { showToast } from '../../toast';
+import { useTranslate } from '../../../docs/site';
 
 const t = useTranslate({
   'zh-CN': {
@@ -29,6 +32,7 @@ const t = useTranslate({
     darkTheme: '深色风格',
     lightTheme: '浅色风格',
     showPopover: '点击弹出气泡',
+    uncontrolled: '非受控模式',
     actionOptions: '选项配置',
     customContent: '自定义内容',
     disableAction: '禁用选项',
@@ -52,6 +56,7 @@ const t = useTranslate({
     darkTheme: 'Dark Theme',
     lightTheme: 'Light Theme',
     showPopover: 'Show Popover',
+    uncontrolled: 'Uncontrolled',
     actionOptions: 'Action Options',
     customContent: 'Custom Content',
     disableAction: 'Disable Action',
@@ -59,7 +64,7 @@ const t = useTranslate({
   },
 });
 
-const placements = [
+const placements: PickerOption[] = [
   'top',
   'top-start',
   'top-end',
@@ -72,7 +77,7 @@ const placements = [
   'bottom',
   'bottom-start',
   'bottom-end',
-];
+].map((item) => ({ text: item, value: item }));
 
 const show = ref({
   showIcon: false,
@@ -85,14 +90,25 @@ const show = ref({
 const showPicker = ref(false);
 const currentPlacement = ref<PopoverPlacement>('top');
 
-const onPickerChange = (value: PopoverPlacement) => {
+const onClickChoosePlacement = () => {
+  showPicker.value = true;
+
+  setTimeout(() => {
+    show.value = {
+      ...show.value,
+      placement: true,
+    };
+  }, 300);
+};
+
+const onPickerChange = (option: PickerConfirmEventParams) => {
   setTimeout(() => {
     show.value.placement = true;
-    currentPlacement.value = value;
+    currentPlacement.value = option.selectedValues[0] as PopoverPlacement;
   });
 };
 
-const onSelect = (action: { text: string }) => Toast(action.text);
+const onSelect = (action: { text: string }) => showToast(action.text);
 </script>
 
 <template>
@@ -109,6 +125,7 @@ const onSelect = (action: { text: string }) => Toast(action.text);
         </van-button>
       </template>
     </van-popover>
+
     <van-popover
       v-model:show="show.darkTheme"
       theme="dark"
@@ -129,7 +146,7 @@ const onSelect = (action: { text: string }) => Toast(action.text);
       readonly
       name="picker"
       :label="t('choosePlacement')"
-      @click="showPicker = true"
+      @click="onClickChoosePlacement"
     />
 
     <van-popup
@@ -210,6 +227,20 @@ const onSelect = (action: { text: string }) => Toast(action.text);
       <template #reference>
         <van-button type="primary">
           {{ t('customContent') }}
+        </van-button>
+      </template>
+    </van-popover>
+  </demo-block>
+
+  <demo-block :title="t('uncontrolled')">
+    <van-popover
+      :actions="t('actions')"
+      placement="top-start"
+      @select="onSelect"
+    >
+      <template #reference>
+        <van-button type="primary">
+          {{ t('uncontrolled') }}
         </van-button>
       </template>
     </van-popover>

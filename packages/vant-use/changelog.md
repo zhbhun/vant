@@ -1,5 +1,25 @@
 # Changelog
 
+## v1.4.4
+
+- Fix `useChildren` not sort children correctly
+
+## v1.4.3
+
+- improve `useEventListener` typing
+
+## v1.4.2
+
+- `useClickAway` support multiple targets
+
+## v1.4.1
+
+- Add `exports` field to package.json, support nuxt 3.
+
+## v1.4.0
+
+- Using `.mjs` extension, `dist/index.esm.js` -> `dist/index.esm.mjs`
+
 ## v1.3.6
 
 - Fix missing VisibilityState type

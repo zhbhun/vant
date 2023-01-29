@@ -86,18 +86,26 @@ exports[`should render demo and match snapshot 1`] = `
   >
     <div class="van-cell__title">
       <span>
-        Component Call
+        Use Dialog Component
       </span>
     </div>
     <i class="van-badge__wrapper van-icon van-icon-arrow van-cell__right-icon">
     </i>
   </div>
-  <transition-stub>
+  <transition-stub name="van-fade"
+                   appear="true"
+                   persisted="false"
+                   css="true"
+  >
   </transition-stub>
-  <transition-stub>
-    <div class="van-popup van-popup--center van-dialog"
-         role="dialog"
+  <transition-stub name="van-dialog-bounce"
+                   appear="false"
+                   persisted="false"
+                   css="true"
+  >
+    <div role="dialog"
          tabindex="0"
+         class="van-popup van-popup--center van-dialog"
          aria-labelledby="Title"
          style="display: none;"
     >
@@ -105,7 +113,7 @@ exports[`should render demo and match snapshot 1`] = `
         Title
       </div>
       <div class="van-dialog__content">
-        <img src="https://img.yzcdn.cn/vant/apple-3.jpg">
+        <img src="https://fastly.jsdelivr.net/npm/@vant/assets/apple-3.jpeg">
       </div>
       <div class="van-hairline--top van-dialog__footer">
         <button type="button"

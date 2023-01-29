@@ -32,13 +32,13 @@ app.use(ShareSheet);
 
 ```js
 import { ref } from 'vue';
-import { Toast } from 'vant';
+import { showToast } from 'vant';
 
 export default {
   setup() {
     const showShare = ref(false);
     const options = [
-      { name: 'Wechat', icon: 'wechat' },
+      { name: 'WeChat', icon: 'wechat' },
       { name: 'Weibo', icon: 'weibo' },
       { name: 'Link', icon: 'link' },
       { name: 'Poster', icon: 'poster' },
@@ -46,7 +46,7 @@ export default {
     ];
 
     const onSelect = (option) => {
-      Toast(option.name);
+      showToast(option.name);
       showShare.value = false;
     };
 
@@ -73,8 +73,8 @@ export default {
     const showShare = ref(false);
     const options = [
       [
-        { name: 'Wechat', icon: 'wechat' },
-        { name: 'Wechat Moments', icon: 'wechat-moments' },
+        { name: 'WeChat', icon: 'wechat' },
+        { name: 'WeChat Moments', icon: 'wechat-moments' },
         { name: 'Weibo', icon: 'weibo' },
         { name: 'QQ', icon: 'qq' },
       ],
@@ -109,15 +109,15 @@ export default {
     const options = [
       {
         name: 'Name',
-        icon: 'https://img.yzcdn.cn/vant/custom-icon-fire.png',
+        icon: 'https://fastly.jsdelivr.net/npm/@vant/assets/custom-icon-fire.png',
       },
       {
         name: 'Name',
-        icon: 'https://img.yzcdn.cn/vant/custom-icon-light.png',
+        icon: 'https://fastly.jsdelivr.net/npm/@vant/assets/custom-icon-light.png',
       },
       {
         name: 'Name',
-        icon: 'https://img.yzcdn.cn/vant/custom-icon-water.png',
+        icon: 'https://fastly.jsdelivr.net/npm/@vant/assets/custom-icon-water.png',
       },
     ];
 
@@ -147,7 +147,7 @@ export default {
   setup() {
     const showShare = ref(false);
     const options = [
-      { name: 'Wechat', icon: 'wechat' },
+      { name: 'WeChat', icon: 'wechat' },
       { name: 'Weibo', icon: 'weibo' },
       { name: 'Link', icon: 'link', description: 'Description' },
       { name: 'Poster', icon: 'poster' },
@@ -174,6 +174,7 @@ export default {
 | cancel-text | Cancel button text | _string_ | `'Cancel'` |
 | description | Description | _string_ | - |
 | duration | Transition duration, unit second | _number \| string_ | `0.3` |
+| z-index | Set the z-index to a fixed value | _number \| string_ | `2000+` |
 | round `v3.2.6` | Whether to show round corner | _boolean_ | `true` |
 | overlay | Whether to show overlay | _boolean_ | `true` |
 | overlay-class | Custom overlay class | _string \| Array \| object_ | - |
@@ -192,7 +193,7 @@ export default {
 | --- | --- | --- |
 | name | Option name | _string_ |
 | description | Option description | _string_ |
-| icon | Option icon，can be set to `wechat` `weibo` `qq` `link` `qrcode` `poster` `weapp-qrcode` `wechat-moments` or image URL | _string_ |
+| icon | Option icon, can be set to `wechat` `weibo` `qq` `link` `qrcode` `poster` `weapp-qrcode` `wechat-moments` or image URL | _string_ |
 | className | Option className is used to set the class props to the share item | _string_ |
 
 ### Events
@@ -249,4 +250,4 @@ The component provides the following CSS variables, which can be used to customi
 | --van-share-sheet-option-description-font-size | _var(--van-font-size-sm)_ | - |
 | --van-share-sheet-cancel-button-font-size | _var(--van-font-size-lg)_ | - |
 | --van-share-sheet-cancel-button-height | _48px_ | - |
-| --van-share-sheet-cancel-button-background | _var(--van-background-color-light)_ | - |
+| --van-share-sheet-cancel-button-background | _var(--van-background-2)_ | - |

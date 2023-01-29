@@ -41,15 +41,18 @@ export default {
         children: [
           { text: 'Delaware', id: 1 },
           { text: 'Florida', id: 2 },
+          { text: 'Georqia', id: 3, disabled: true },
         ],
       },
       {
         text: 'Group 2',
         children: [
-          { text: 'Alabama', id: 5 },
-          { text: 'Kansas', id: 6 },
+          { text: 'Alabama', id: 4 },
+          { text: 'Kansas', id: 5 },
+          { text: 'Louisiana', id: 6 },
         ],
       },
+      { text: 'Group 3', disabled: true },
     ];
 
     return {
@@ -84,15 +87,18 @@ export default {
         children: [
           { text: 'Delaware', id: 1 },
           { text: 'Florida', id: 2 },
+          { text: 'Georqia', id: 3, disabled: true },
         ],
       },
       {
         text: 'Group 2',
         children: [
-          { text: 'Alabama', id: 5 },
-          { text: 'Kansas', id: 6 },
+          { text: 'Alabama', id: 4 },
+          { text: 'Kansas', id: 5 },
+          { text: 'Louisiana', id: 6 },
         ],
       },
+      { text: 'Group 3', disabled: true },
     ];
 
     return {
@@ -115,11 +121,11 @@ export default {
   <template #content>
     <van-image
       v-if="activeIndex === 0"
-      src="https://img.yzcdn.cn/vant/apple-1.jpg"
+      src="https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg"
     />
     <van-image
       v-if="activeIndex === 1"
-      src="https://img.yzcdn.cn/vant/apple-2.jpg"
+      src="https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg"
     />
   </template>
 </van-tree-select>
@@ -158,8 +164,24 @@ export default {
     return {
       activeIndex,
       items: [
-        { text: 'Group 1', children: [], dot: true },
-        { text: 'Group 2', children: [], badge: 5 },
+        {
+          text: 'Group 1',
+          children: [
+            { text: 'Delaware', id: 1 },
+            { text: 'Florida', id: 2 },
+            { text: 'Georqia', id: 3, disabled: true },
+          ],
+          dot: true,
+        },
+        {
+          text: 'Group 2',
+          children: [
+            { text: 'Alabama', id: 4 },
+            { text: 'Kansas', id: 5 },
+            { text: 'Louisiana', id: 6 },
+          ],
+          badge: 5,
+        },
       ],
     };
   },
@@ -245,10 +267,10 @@ The component provides the following CSS variables, which can be used to customi
 | Name | Default Value | Description |
 | --- | --- | --- |
 | --van-tree-select-font-size | _var(--van-font-size-md)_ | - |
-| --van-tree-select-nav-background-color | _var(--van-background-color)_ | - |
-| --van-tree-select-content-background-color | _var(--van-background-color-light)_ | - |
+| --van-tree-select-nav-background | _var(--van-background)_ | - |
+| --van-tree-select-content-background | _var(--van-background-2)_ | - |
 | --van-tree-select-nav-item-padding | _14px var(--van-padding-sm)_ | - |
 | --van-tree-select-item-height | _48px_ | - |
-| --van-tree-select-item-active-color | _var(--van-danger-color)_ | - |
+| --van-tree-select-item-active-color | _var(--van-primary-color)_ | - |
 | --van-tree-select-item-disabled-color | _var(--van-gray-5)_ | - |
 | --van-tree-select-item-selected-size | _16px_ | - |

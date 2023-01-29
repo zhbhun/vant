@@ -43,15 +43,18 @@ export default {
         children: [
           { text: '杭州', id: 1 },
           { text: '温州', id: 2 },
+          { text: '宁波', id: 3, disabled: true },
         ],
       },
       {
         text: '江苏',
         children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
+          { text: '南京', id: 4 },
+          { text: '无锡', id: 5 },
+          { text: '徐州', id: 6 },
         ],
       },
+      { text: '福建', disabled: true },
     ];
 
     return {
@@ -88,15 +91,18 @@ export default {
         children: [
           { text: '杭州', id: 1 },
           { text: '温州', id: 2 },
+          { text: '宁波', id: 3, disabled: true },
         ],
       },
       {
         text: '江苏',
         children: [
-          { text: '南京', id: 5 },
-          { text: '无锡', id: 6 },
+          { text: '南京', id: 4 },
+          { text: '无锡', id: 5 },
+          { text: '徐州', id: 6 },
         ],
       },
+      { text: '福建', disabled: true },
     ];
 
     return {
@@ -121,11 +127,11 @@ export default {
   <template #content>
     <van-image
       v-if="activeIndex === 0"
-      src="https://img.yzcdn.cn/vant/apple-1.jpg"
+      src="https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg"
     />
     <van-image
       v-if="activeIndex === 1"
-      src="https://img.yzcdn.cn/vant/apple-2.jpg"
+      src="https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg"
     />
   </template>
 </van-tree-select>
@@ -166,8 +172,24 @@ export default {
     return {
       activeIndex,
       items: [
-        { text: '浙江', children: [], dot: true },
-        { text: '江苏', children: [], badge: 5 },
+        {
+          text: '浙江',
+          children: [
+            { text: '杭州', id: 1 },
+            { text: '温州', id: 2 },
+            { text: '宁波', id: 3, disabled: true },
+          ],
+          dot: true,
+        },
+        {
+          text: '江苏',
+          children: [
+            { text: '南京', id: 4 },
+            { text: '无锡', id: 5 },
+            { text: '徐州', id: 6 },
+          ],
+          badge: 5,
+        },
       ],
     };
   },
@@ -248,13 +270,13 @@ import type { TreeSelectItem, TreeSelectChild, TreeSelectProps } from 'vant';
 
 组件提供了下列 CSS 变量，可用于自定义样式，使用方法请参考 [ConfigProvider 组件](#/zh-CN/config-provider)。
 
-| 名称 | 默认值 | 描述 |
-| --- | --- | --- |
-| --van-tree-select-font-size | _var(--van-font-size-md)_ | - |
-| --van-tree-select-nav-background-color | _var(--van-background-color)_ | - |
-| --van-tree-select-content-background-color | _var(--van-background-color-light)_ | - |
-| --van-tree-select-nav-item-padding | _14px var(--van-padding-sm)_ | - |
-| --van-tree-select-item-height | _48px_ | - |
-| --van-tree-select-item-active-color | _var(--van-danger-color)_ | - |
-| --van-tree-select-item-disabled-color | _var(--van-gray-5)_ | - |
-| --van-tree-select-item-selected-size | _16px_ | - |
+| 名称                                  | 默认值                       | 描述 |
+| ------------------------------------- | ---------------------------- | ---- |
+| --van-tree-select-font-size           | _var(--van-font-size-md)_    | -    |
+| --van-tree-select-nav-background      | _var(--van-background)_      | -    |
+| --van-tree-select-content-background  | _var(--van-background-2)_    | -    |
+| --van-tree-select-nav-item-padding    | _14px var(--van-padding-sm)_ | -    |
+| --van-tree-select-item-height         | _48px_                       | -    |
+| --van-tree-select-item-active-color   | _var(--van-primary-color)_   | -    |
+| --van-tree-select-item-disabled-color | _var(--van-gray-5)_          | -    |
+| --van-tree-select-item-selected-size  | _16px_                       | -    |

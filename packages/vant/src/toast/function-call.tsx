@@ -1,14 +1,8 @@
-import { ref, watch, getCurrentInstance, type App } from 'vue';
-import {
-  extend,
-  isObject,
-  inBrowser,
-  withInstall,
-  type ComponentInstance,
-} from '../utils';
+import { ref, watch, getCurrentInstance } from 'vue';
+import { extend, isObject, inBrowser } from '../utils';
 import { mountComponent, usePopupState } from '../utils/mount-component';
 import VanToast from './Toast';
-import type { ToastType, ToastOptions } from './types';
+import type { ToastType, ToastOptions, ToastWrapperInstance } from './types';
 
 const defaultOptions: ToastOptions = {
   icon: '',
@@ -32,7 +26,7 @@ const defaultOptions: ToastOptions = {
   closeOnClickOverlay: false,
 };
 
-let queue: ComponentInstance[] = [];
+let queue: ToastWrapperInstance[] = [];
 let allowMultiple = false;
 let currentOptions = extend({}, defaultOptions);
 
@@ -77,13 +71,13 @@ function createInstance() {
 
       return {
         open,
-        clear: close,
+        close,
         message,
       };
     },
   });
 
-  return instance;
+  return instance as ToastWrapperInstance;
 }
 
 function getInstance() {
@@ -95,9 +89,9 @@ function getInstance() {
   return queue[queue.length - 1];
 }
 
-function Toast(options: string | ToastOptions = {}) {
+export function showToast(options: string | ToastOptions = {}) {
   if (!inBrowser) {
-    return {} as ComponentInstance;
+    return {} as ToastWrapperInstance;
   }
 
   const toast = getInstance();
@@ -116,30 +110,33 @@ function Toast(options: string | ToastOptions = {}) {
 }
 
 const createMethod = (type: ToastType) => (options: string | ToastOptions) =>
-  Toast(extend({ type }, parseOptions(options)));
+  showToast(extend({ type }, parseOptions(options)));
 
-Toast.loading = createMethod('loading');
-Toast.success = createMethod('success');
-Toast.fail = createMethod('fail');
+export const showLoadingToast = createMethod('loading');
+export const showSuccessToast = createMethod('success');
+export const showFailToast = createMethod('fail');
 
-Toast.clear = (all?: boolean) => {
+export const closeToast = (all?: boolean) => {
   if (queue.length) {
     if (all) {
       queue.forEach((toast) => {
-        toast.clear();
+        toast.close();
       });
       queue = [];
     } else if (!allowMultiple) {
-      queue[0].clear();
+      queue[0].close();
     } else {
-      queue.shift()?.clear();
+      queue.shift()?.close();
     }
   }
 };
 
-function setDefaultOptions(options: ToastOptions): void;
-function setDefaultOptions(type: ToastType, options: ToastOptions): void;
-function setDefaultOptions(
+export function setToastDefaultOptions(options: ToastOptions): void;
+export function setToastDefaultOptions(
+  type: ToastType,
+  options: ToastOptions
+): void;
+export function setToastDefaultOptions(
   type: ToastType | ToastOptions,
   options?: ToastOptions
 ) {
@@ -150,9 +147,7 @@ function setDefaultOptions(
   }
 }
 
-Toast.setDefaultOptions = setDefaultOptions;
-
-Toast.resetDefaultOptions = (type?: ToastType) => {
+export const resetToastDefaultOptions = (type?: ToastType) => {
   if (typeof type === 'string') {
     defaultOptionsMap.delete(type);
   } else {
@@ -161,13 +156,6 @@ Toast.resetDefaultOptions = (type?: ToastType) => {
   }
 };
 
-Toast.allowMultiple = (value = true) => {
+export const allowMultipleToast = (value = true) => {
   allowMultiple = value;
 };
-
-Toast.install = (app: App) => {
-  app.use(withInstall(VanToast));
-  app.config.globalProperties.$toast = Toast;
-};
-
-export { Toast };

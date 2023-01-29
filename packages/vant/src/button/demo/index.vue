@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import VanButton from '..';
-import { useTranslate } from '../../../docs/site/use-translate';
+import { cdnURL, useTranslate } from '../../../docs/site';
 
 const t = useTranslate({
   'zh-CN': {
@@ -107,7 +107,7 @@ const t = useTranslate({
     <van-button
       plain
       type="primary"
-      icon="https://img.yzcdn.cn/vant/user-active.png"
+      :icon="cdnURL('user-active.png')"
       :text="t('button')"
     />
   </demo-block>
@@ -127,7 +127,7 @@ const t = useTranslate({
     <van-button
       :text="t('urlRoute')"
       type="primary"
-      url="https://github.com/youzan/vant"
+      url="https://github.com/vant-ui/vant"
     />
     <van-button :text="t('vueRoute')" type="primary" to="index" />
   </demo-block>
@@ -144,8 +144,6 @@ const t = useTranslate({
 
 <style lang="less">
 .demo-button {
-  background: var(--van-background-color-light);
-
   .van-button {
     &--large {
       margin-bottom: var(--van-padding-md);

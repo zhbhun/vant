@@ -10,13 +10,13 @@ test('should emit "update:modelValue" event when after inputting', () => {
   expect(wrapper.emitted('update:modelValue')[0][0]).toEqual('1');
 });
 
-test('should emit click-input event when input is clicked', () => {
+test('should emit clickInput event when input is clicked', () => {
   const wrapper = mount(Field);
   wrapper.find('input').trigger('click');
-  expect(wrapper.emitted('click-input')[0][0]).toBeTruthy();
+  expect(wrapper.emitted('clickInput')[0][0]).toBeTruthy();
 });
 
-test('should emit click-input event when using input slot', () => {
+test('should emit clickInput event when using input slot', () => {
   const wrapper = mount(Field, {
     slots: {
       input: () => 'Custom Input',
@@ -24,10 +24,10 @@ test('should emit click-input event when using input slot', () => {
   });
 
   wrapper.find('.van-field__control').trigger('click');
-  expect(wrapper.emitted('click-input')[0][0]).toBeTruthy();
+  expect(wrapper.emitted('clickInput')[0][0]).toBeTruthy();
 });
 
-test('should emit click-left-icon event when left icon is clicked', () => {
+test('should emit clickLeftIcon event when left icon is clicked', () => {
   const wrapper = mount(Field, {
     props: {
       leftIcon: 'contact',
@@ -35,10 +35,10 @@ test('should emit click-left-icon event when left icon is clicked', () => {
   });
 
   wrapper.find('.van-field__left-icon').trigger('click');
-  expect(wrapper.emitted('click-left-icon')[0][0]).toBeTruthy();
+  expect(wrapper.emitted('clickLeftIcon')[0][0]).toBeTruthy();
 });
 
-test('should emit click-right-icon event when right icon is clicked', () => {
+test('should emit clickRightIcon event when right icon is clicked', () => {
   const wrapper = mount(Field, {
     props: {
       rightIcon: 'search',
@@ -46,7 +46,7 @@ test('should emit click-right-icon event when right icon is clicked', () => {
   });
 
   wrapper.find('.van-field__right-icon').trigger('click');
-  expect(wrapper.emitted('click-right-icon')[0][0]).toBeTruthy();
+  expect(wrapper.emitted('clickRightIcon')[0][0]).toBeTruthy();
 });
 
 test('should format input value when type is number', () => {
@@ -177,7 +177,7 @@ test('should limit maxlength of input value when using maxlength prop', async ()
   expect(wrapper.emitted('update:modelValue')[0][0]).toEqual('123');
   await wrapper.setProps({ modelValue: '123' });
 
-  // see: https://github.com/youzan/vant/issues/7265
+  // see: https://github.com/vant-ui/vant/issues/7265
   input.element.value = 1423;
   input.trigger('input');
   expect(input.element.value).toEqual('123');
@@ -426,6 +426,17 @@ test('should allow to set autocomplete attribute', () => {
   );
 });
 
+test('should allow to set enterkeyhint attribute', () => {
+  const wrapper = mount(Field, {
+    props: {
+      enterkeyhint: 'done',
+    },
+  });
+  expect(wrapper.find('input').element.getAttribute('enterkeyhint')).toEqual(
+    'done'
+  );
+});
+
 test('should change clear icon when using clear-icon prop', async () => {
   const wrapper = mount(Field, {
     props: {
@@ -497,4 +508,28 @@ test('should render word limit with emoji correctly', () => {
     },
   });
   expect(wrapper.find('.van-field__word-limit').html()).toMatchSnapshot();
+});
+
+test('should render left icon inside label when label-align is top', () => {
+  const wrapper = mount(Field, {
+    props: {
+      label: 'Label',
+      labelAlign: 'top',
+      leftIcon: 'success',
+    },
+  });
+  expect(wrapper.html()).toMatchSnapshot();
+});
+
+test('should render label correctly when dynamically set empty label', async () => {
+  const wrapper = mount(Field, {
+    props: {
+      label: 'abc',
+    },
+  });
+
+  expect(wrapper.find('.van-field__label').html()).toMatchSnapshot();
+
+  await wrapper.setProps({ label: '' });
+  expect(wrapper.find('.van-field__label').exists()).toBeFalsy();
 });

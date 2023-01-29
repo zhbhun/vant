@@ -1,8 +1,8 @@
 <div class="van-doc-card">
   <div class="van-doc-intro">
-    <img class="van-doc-intro__logo" style="width: 120px; height: 120px;" src="https://img.yzcdn.cn/vant/logo.png">
+    <img class="van-doc-intro__logo" style="width: 120px; height: 120px;" src="https://fastly.jsdelivr.net/npm/@vant/assets/logo.png">
     <h2 style="margin: 0; font-size: 36px; line-height: 60px;">Vant</h2>
-    <p>Mobile UI Components built on Vue</p>
+    <p>Lightweight Mobile UI Components built on Vue</p>
   </div>
 </div>
 
@@ -10,6 +10,7 @@
 
 - 🚀 1KB Component average size (min+gzip)
 - 🚀 70+ High quality components
+- 🚀 Zero third-party dependencies
 - 💪 90%+ Unit test coverage
 - 💪 Written in TypeScript
 - 📖 Extensive documentation and demos
@@ -18,9 +19,10 @@
 - 🍭 Support Tree Shaking
 - 🍭 Support Custom Theme
 - 🍭 Support Accessibility (still improving)
-- 🍭 Support Dark Mode (Requires upgrade to [Vant 4](https://vant-contrib.gitee.io/vant/v4/#/en-US/config-provider))
+- 🍭 Support Dark Mode
+- 🍭 Support Nuxt 3
 - 🍭 Support SSR
-- 🌍 Support i18n, built-in 20+ languages
+- 🌍 Support i18n, built-in 30+ languages
 
 ### Quickstart
 
@@ -32,34 +34,45 @@ Vant 2 supports modern browsers and Android >= 4.0、iOS >= 8.0.
 
 Vant 3/4 supports modern browsers and Chrome >= 51、iOS >= 10.0 (same as Vue 3).
 
+### Maintenance Status
+
+The current maintenance status of each version of Vant is as follows:
+
+| Name | Framework | Release | Latest Version | Status |
+| --- | --- | --- | --- | --- |
+| Vant 4 | Vue 3 | `2022.12` | ![](https://img.shields.io/npm/v/vant/latest?style=flat-square) | Under active development |
+| Vant 3 | Vue 3 | `2020.12` | ![](https://img.shields.io/npm/v/vant/latest-v3?style=flat-square) | Bugfix only |
+| Vant 2 | Vue 2 | `2019.06` | ![](https://img.shields.io/npm/v/vant/latest-v2?style=flat-square) | Bugfix only |
+| Vant 1 | Vue 2 | `2018.03` | ![](https://img.shields.io/npm/v/vant/latest-v1?style=flat-square) | End of life |
+
 ## Links
 
 ### Official Ecosystem
 
 | Project | Description |
 | --- | --- |
-| [vant-weapp](https://github.com/youzan/vant-weapp) | WeChat MiniProgram UI |
-| [vant-demo](https://github.com/youzan/vant-demo) | Collection of Vant demos |
-| [vant-cli](https://github.com/youzan/vant/tree/dev/packages/vant-cli) | Scaffold for UI library |
-| [vant-icons](https://github.com/youzan/vant/tree/dev/packages/vant-icons) | Vant icons |
-| [vant-touch-emulator](https://github.com/youzan/vant/tree/dev/packages/vant-touch-emulator) | Using vant in desktop browsers |
+| [vant-weapp](https://github.com/vant-ui/vant-weapp) | WeChat MiniProgram UI |
+| [vant-demo](https://github.com/vant-ui/vant-demo) | Collection of Vant demos |
+| [vant-cli](https://github.com/vant-ui/vant/tree/main/packages/vant-cli) | Scaffold for UI library |
+| [vant-icons](https://github.com/vant-ui/vant/tree/main/packages/vant-icons) | Vant icons |
+| [vant-touch-emulator](https://github.com/vant-ui/vant/tree/main/packages/vant-touch-emulator) | Using vant in desktop browsers |
 
 ### Community Ecosystem
 
 | Project | Description |
 | --- | --- |
 | [3lang3/react-vant](https://github.com/3lang3/react-vant) | React mobile UI Components based on Vant |
-| [rc-ui-lib](https://github.com/rancui/rc-ui-lib) | React Mobile UI Components Library |
 | [vant-aliapp](https://github.com/ant-move/Vant-Aliapp) | Alipay MiniProgram UI |
 | [taroify](https://gitee.com/mallfoundry/taroify) | Vant Taro |
 | [vant-theme](https://github.com/Aisen60/vant-theme) | Online theme preview built on Vant UI |
 | [@antmjs/vantui](https://github.com/antmjs/vantui) | Mobile UI Components based on Vant, supporting Taro and React |
+| [sfc-playground-vant](https://github.com/zhixiaoqiang/sfc-playground-vant) | Try Vant in the Playground. Currently only Vant 3+ is supported |
 
 ### Other Links
 
-- [Feedback](https://github.com/youzan/vant/issues)
+- [Feedback](https://github.com/vant-ui/vant/issues)
 - [Changelog](#/en-US/changelog)
-- [Gitter](https://gitter.im/vant-contrib/discuss?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+- [Discussions](https://github.com/vant-ui/vant/discussions)
 
 ## Contribution
 
@@ -75,14 +88,14 @@ Core contributors of Vant and Vant Weapp:
 
 Thanks to the following friends for their contributions to Vant:
 
-<a href="https://github.com/youzan/vant/graphs/contributors" target="_black">
+<a href="https://github.com/vant-ui/vant/graphs/contributors" target="_black">
   <img src="https://opencollective.com/vant/contributors.svg?width=890&button=false" alt="contributors" style="width: 100%; margin: 16px 0">
 </a>
 
 ### Contribution Guide
 
-Please make sure to read the [Contributing Guide](https://github.com/youzan/vant/blob/dev/.github/CONTRIBUTING.md) before making a pull request.
+Please make sure to read the [Contributing Guide](https://github.com/vant-ui/vant/blob/main/.github/CONTRIBUTING.md) before making a pull request.
 
 ### LICENSE
 
-[MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89)
+[MIT](https://zh.wikipedia.org/wiki/MIT%E8%A8%B1%E5%8F%AF%E8%AD%89).

@@ -3,8 +3,8 @@ import VanTabs from '../../tabs';
 import VanTab from '..';
 import VanIcon from '../../icon';
 import { ref } from 'vue';
-import { useTranslate } from '../../../docs/site/use-translate';
-import { Toast } from '../../toast';
+import { useTranslate } from '../../../docs/site';
+import { showToast } from '../../toast';
 import Shrink from './Shrink.vue';
 
 const t = useTranslate({
@@ -57,7 +57,7 @@ const activeName = ref('b');
 const tabs = [1, 2, 3, 4];
 
 const onClickTab = ({ title }: { title: string }) => {
-  Toast(title);
+  showToast(title);
 };
 
 const beforeChange = (name: number) => {
@@ -187,11 +187,11 @@ const beforeChange = (name: number) => {
 
   .van-tab__panel {
     padding: 24px 20px;
-    background-color: var(--van-background-color-light);
+    background: var(--van-background-2);
   }
 
   .van-tabs--card .van-tab__panel {
-    background-color: transparent;
+    background: transparent;
   }
 }
 </style>

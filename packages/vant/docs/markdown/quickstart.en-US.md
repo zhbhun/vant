@@ -26,18 +26,18 @@ pnpm add vant
 
 ### CDN
 
-The easiest way to use Vant is to include a CDN link in the html file, after which you can access all components via the global variable `vant`.
+The easiest way to use Vant is to include a CDN link in the HTML file, after which you can access all components via the global variable `vant`.
 
 ```html
 <!-- import style -->
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/vant@3/lib/index.css"
+  href="https://fastly.jsdelivr.net/npm/vant@4/lib/index.css"
 />
 
 <!-- import script -->
-<script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
-<script src="https://cdn.jsdelivr.net/npm/vant@3/lib/vant.min.js"></script>
+<script src="https://fastly.jsdelivr.net/npm/vue@3"></script>
+<script src="https://fastly.jsdelivr.net/npm/vant@4/lib/vant.min.js"></script>
 
 <script>
   // Render the Button component
@@ -50,7 +50,7 @@ The easiest way to use Vant is to include a CDN link in the html file, after whi
   app.use(vant.Lazyload);
 
   // Call function component
-  vant.Toast('Message');
+  vant.showToast('Message');
 
   app.mount('#app');
 </script>
@@ -73,10 +73,10 @@ For enterprise developers, we recommend:
 
 ### CLI
 
-We recommend to use [Vue Cli](https://cli.vuejs.org/) to create a new project.
+We recommend to use [Vue CLI](https://cli.vuejs.org/) to create a new project.
 
 ```bash
-# Install Vue Cli
+# Install Vue CLI
 npm install -g @vue/cli
 
 # Create a project
@@ -86,126 +86,155 @@ vue create hello-world
 vue ui
 ```
 
-![](https://img.yzcdn.cn/vant/vue-cli-demo-201809030812.png)
+![](https://fastly.jsdelivr.net/npm/@vant/assets/vue-cli-demo-201809030812.png)
 
 In the GUI, click on 'Dependencies' -> `Install Dependencies` and add `vant` to the dependencies.
 
 ## Usage
 
-### Import on demand in vite projects (recommended)
+### Basic Usage
 
-If you are using vite, please use [vite-plugin-style-import](https://github.com/anncwb/vite-plugin-style-import).
+The basic usage of Vant components;
+
+```js
+import { createApp } from 'vue';
+// 1. Import the components you need
+import { Button } from 'vant';
+// 2. Import the components style
+import 'vant/lib/index.css';
+
+const app = createApp();
+
+// 3. Register the components you need
+app.use(Button);
+```
+
+> Tip: Vant supports Tree Shaking by default, so you don't need to configure any plugins, the unused JS code will be removed by Tree Shaking, but CSS styles cannot be optimized by it.
+
+### Import on demand
+
+If you are using vite, webpack or vue-cli, you can use [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components), this plugin can help you to auto importing components and reduce CSS file size.
 
 #### 1. Install Plugin
 
 ```bash
 # with npm
-npm i vite-plugin-style-import@1.4.1 -D
+npm i unplugin-vue-components -D
 
 # with yarn
-yarn add vite-plugin-style-import@1.4.1 -D
+yarn add unplugin-vue-components -D
 
 # with pnpm
-pnpm add vite-plugin-style-import@1.4.1 -D
+pnpm add unplugin-vue-components -D
 ```
 
 #### 2. Configure Plugin
 
-Configure the plugin in the `vite.config.js` file:
+For `vite` based project，configure the plugin in the `vite.config.js` file:
 
 ```js
 import vue from '@vitejs/plugin-vue';
-import styleImport, { VantResolve } from 'vite-plugin-style-import';
+import Components from 'unplugin-vue-components/vite';
+import { VantResolver } from 'unplugin-vue-components/resolvers';
 
 export default {
   plugins: [
     vue(),
-    styleImport({
-      resolves: [VantResolve()],
+    Components({
+      resolvers: [VantResolver()],
     }),
   ],
 };
 ```
 
-#### 3. Import Components
-
-Then you can import components from Vant:
+For `vue-cli` based project，configure the plugin in the `vue.config.js` file:
 
 ```js
-import { createApp } from 'vue';
-import { Button } from 'vant';
+const { VantResolver } = require('unplugin-vue-components/resolvers');
+const ComponentsPlugin = require('unplugin-vue-components/webpack');
 
-const app = createApp();
-app.use(Button);
+module.exports = {
+  configureWebpack: {
+    plugins: [
+      ComponentsPlugin({
+        resolvers: [VantResolver()],
+      }),
+    ],
+  },
+};
 ```
 
-> Vant supports Tree Shaking by default.
-
-### Import on demand in non-vite projects (recommended)
-
-In non-vite projects, use [babel-plugin-import](https://github.com/ant-design/babel-plugin-import) to import components on demand.
-
-#### 1. Install Plugin
-
-```bash
-npm i babel-plugin-import -D
-```
-
-#### 2. Configure Plugin
-
-Set babel config in `.babelrc` or `babel.config.js`:
-
-```json
-{
-  "plugins": [
-    [
-      "import",
-      {
-        "libraryName": "vant",
-        "libraryDirectory": "es",
-        "style": true
-      }
-    ]
-  ]
-}
-```
-
-#### 3. Import Components
-
-Then you can import components from Vant:
+For `webpack` based project，configure the plugin in the `webpack.config.js` file:
 
 ```js
-// Input
-import { Button } from 'vant';
+const { VantResolver } = require('unplugin-vue-components/resolvers');
+const ComponentsPlugin = require('unplugin-vue-components/webpack');
 
-// Output
-import Button from 'vant/es/button';
-import 'vant/es/button/style';
+module.exports = {
+  plugins: [
+    ComponentsPlugin({
+      resolvers: [VantResolver()],
+    }),
+  ],
+};
 ```
 
-> If you are using TypeScript，please use [ts-import-plugin](https://github.com/Brooooooklyn/ts-import-plugin) instead.
+#### 3. Using Components
 
-### Import all components (not recommended)
+Then you can using components from Vant in the template, the `unplugin-vue-components` will automatically import the corresponding Vant components.
 
-Import all components will **increase the bundle size**, so this is not recommended.
+```html
+<template>
+  <van-button type="primary" />
+</template>
+```
+
+#### 4. Style of Function Components
+
+Some components of Vant are provided as function, including `Toast`, `Dialog`, `Notify` and `ImagePreview`. When using function components, `unplugin-vue-components` can not auto import the component style, so we need to import style manually.
 
 ```js
-import { createApp } from 'vue';
-import Vant from 'vant';
-import 'vant/lib/index.css';
+// Toast
+import { showToast } from 'vant';
+import 'vant/es/toast/style';
 
-const app = createApp();
-app.use(Vant);
+// Dialog
+import { showDialog } from 'vant';
+import 'vant/es/dialog/style';
+
+// Notify
+import { showNotify } from 'vant';
+import 'vant/es/notify/style';
+
+// ImagePreview
+import { showImagePreview } from 'vant';
+import 'vant/es/image-preview/style';
 ```
 
-> If you configured babel-plugin-import, you won't be allowed to import all components.
+> Tip: "Full Import" and "On-demand Import" should not be used at the same time, otherwise it will lead to problems such as code duplication and style overrides.
 
-### Manually import (not recommended)
+#### Tips
 
-```js
-// import script
-import Button from 'vant/es/button/index';
-// import style
-// if the component does not have a style file, there is no need to import
-import 'vant/es/button/style/index';
+- "Full Import" and "On-demand Import" should not be used at the same time, otherwise it will lead to problems such as code duplication and style overrides.
+- unplugin-vue-components is not officially maintained by Vant. If you encounter issues when using this plugin, please feedback to [antfu/unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) repository.
+
+## With Frameworks
+
+### Use Vant in Nuxt 3
+
+When using Vant in Nuxt 3, you should add `/vant/` to the `build.transpile`:
+
+```ts
+import { defineNuxtConfig } from 'nuxt';
+
+export default defineNuxtConfig({
+  experimental: {
+    externalVue: true,
+  },
+});
 ```
+
+Reference:
+
+- [nuxt/framework#6761](https://github.com/nuxt/framework/issues/6761)
+- [nuxt/framework#4084](https://github.com/nuxt/framework/issues/4084)

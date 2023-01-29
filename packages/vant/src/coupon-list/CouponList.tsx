@@ -24,19 +24,19 @@ import { useRefs } from '../composables/use-refs';
 // Components
 import { Tab } from '../tab';
 import { Tabs } from '../tabs';
+import { Empty } from '../empty';
 import { Field } from '../field';
 import { Button } from '../button';
 import { Coupon, CouponInfo } from '../coupon';
 import { useRect } from '@vant/use';
 
 const [name, bem, t] = createNamespace('coupon-list');
-const EMPTY_IMAGE = 'https://img.yzcdn.cn/vant/coupon-empty.png';
-const couponListProps = {
+export const couponListProps = {
   code: makeStringProp(''),
   coupons: makeArrayProp<CouponInfo>(),
   currency: makeStringProp('¥'),
   showCount: truthProp,
-  emptyImage: makeStringProp(EMPTY_IMAGE),
+  emptyImage: String,
   chosenCoupon: makeNumberProp(-1),
   enabledTitle: String,
   disabledTitle: String,
@@ -101,10 +101,9 @@ export default defineComponent({
     };
 
     const renderEmpty = () => (
-      <div class={bem('empty')}>
-        <img src={props.emptyImage} />
-        <p>{t('noCoupon')}</p>
-      </div>
+      <Empty image={props.emptyImage}>
+        <p class={bem('empty-tip')}>{t('noCoupon')}</p>
+      </Empty>
     );
 
     const renderExchangeBar = () => {
@@ -121,7 +120,7 @@ export default defineComponent({
             />
             <Button
               plain
-              type="danger"
+              type="primary"
               class={bem('exchange')}
               text={props.exchangeButtonText || t('exchange')}
               loading={props.exchangeButtonLoading}
@@ -215,7 +214,7 @@ export default defineComponent({
             v-show={props.showCloseButton}
             round
             block
-            type="danger"
+            type="primary"
             class={bem('close')}
             text={props.closeButtonText || t('close')}
             onClick={() => emit('change', -1)}

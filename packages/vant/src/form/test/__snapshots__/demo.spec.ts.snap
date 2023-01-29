@@ -171,7 +171,6 @@ exports[`should render demo and match snapshot 1`] = `
             <div class="van-field__control van-field__control--custom">
               <div role="switch"
                    class="van-switch"
-                   style="font-size: 20px;"
                    tabindex="0"
                    aria-checked="false"
               >
@@ -450,7 +449,7 @@ exports[`should render demo and match snapshot 1`] = `
                 <div class="van-uploader__wrapper">
                   <div class="van-uploader__preview">
                     <div class="van-image van-uploader__preview-image">
-                      <img src="https://img.yzcdn.cn/vant/leaf.jpg"
+                      <img src="https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg"
                            class="van-image__img"
                            style="object-fit: cover;"
                       >
@@ -460,7 +459,7 @@ exports[`should render demo and match snapshot 1`] = `
                       </div>
                     </div>
                     <div role="button"
-                         class="van-uploader__preview-delete"
+                         class="van-uploader__preview-delete van-uploader__preview-delete--shadow"
                          tabindex="0"
                          aria-label="Delete"
                     >
@@ -523,7 +522,7 @@ exports[`should render demo and match snapshot 1`] = `
           <div class="van-field__body">
             <input type="text"
                    id="van-field-input"
-                   name="datetimePicker"
+                   name="datePicker"
                    class="van-field__control"
                    readonly
                    placeholder="Select time"

@@ -1,5 +1,5 @@
-import chalk from 'chalk';
-import { createRequire } from 'module';
+import color from 'picocolors';
+import { createRequire } from 'node:module';
 import { createServer, build } from 'vite';
 import {
   getViteConfigForSiteDev,
@@ -29,17 +29,23 @@ export function genSiteEntry(): Promise<void> {
 export async function compileSite(production = false) {
   await genSiteEntry();
   if (production) {
-    const config = mergeCustomViteConfig(getViteConfigForSiteProd());
+    const config = await mergeCustomViteConfig(
+      getViteConfigForSiteProd(),
+      'production'
+    );
     await build(config);
   } else {
-    const config = mergeCustomViteConfig(getViteConfigForSiteDev());
+    const config = await mergeCustomViteConfig(
+      getViteConfigForSiteDev(),
+      'development'
+    );
     const server = await createServer(config);
-    await server.listen();
+    await server.listen(config.server?.port);
 
     const require = createRequire(import.meta.url);
     const { version } = require('vite/package.json');
-    const viteInfo = chalk.cyan(`vite v${version}`);
-    console.log(`\n  ${viteInfo}` + chalk.green(` dev server running at:\n`));
+    const viteInfo = color.cyan(`vite v${version}`);
+    console.log(`\n  ${viteInfo}` + color.green(` dev server running at:\n`));
     server.printUrls();
   }
 }

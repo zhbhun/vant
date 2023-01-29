@@ -1,5 +1,95 @@
 # 更新日志
 
+## v6.0.0 [unreleased]
+
+- vite: 由 v3 升级至 v4
+- @vitejs/plugin-vue: 由 v3 升级至 v4
+- @vitejs/plugin-vue-jsx: 由 v2 升级至 v3
+- 移除 `site.searchConfig` 配置项
+
+## v5.1.0
+
+`2022-11-05`
+
+- 支持读取 `vite.config.ts` 文件来自定义 vite 配置
+- 修复设置 vite 的 `server.port` 配置项不生效的问题
+
+## v5.0.2
+
+`2022-10-07`
+
+- 修复首次运行 dev 时 vite 引入了两份 Vue 代码导致渲染失败的问题
+
+## v5.0.1
+
+`2022-10-06`
+
+- 修复 jest 版本未正确升级的问题
+
+## v5.0.0
+
+### 依赖升级
+
+`2022-10-06`
+
+对以下依赖进行了大版本升级：
+
+- vite: 由 v2 升级至 v3
+- jest: 由 v27 升级至 v29
+- @vitejs/plugin-vue: 由 v2 升级至 v3
+- @vitejs/plugin-vue-jsx: 由 v1 升级至 v2
+
+### 依赖精简
+
+- 不再默认安装 `gh-pages` 依赖，请按照如下方式更新 `package.json`：
+
+```diff
+- "release:site": "pnpm build:site && gh-pages -d site-dist",
++ "release:site": "pnpm build:site && npx gh-pages -d site-dist",
+```
+
+- 不再默认内置 `stylelint`，需要的话可以自行安装：
+
+```bash
+yarn add stylelint@13 @vant/stylelint-config
+```
+
+### 移除 vetur 相关配置
+
+由于 Vue 3 推荐使用 volar 而不是 vetur，因此移除了 vetur 相关的配置文件。
+
+现在会默认生成 WebStorm 所需的 web-types.json 文件到 `lib/web-types.json` 目录下。
+
+## v4.0.4
+
+`2022-07-02`
+
+- 修复构建 sfc 文件的类型定义时报错的问题
+
+## v4.0.3
+
+`2022-07-02`
+
+- 新增 `build.bundleOptions` 配置项
+- 新增 `css.removeSourceFile` 配置项
+- 修复编译后的 script setup 中，引用的组件不生效的问题
+- 移除未使用的 esm bundle
+- 移除未使用的 ssr.js 文件
+
+## v4.0.2
+
+`2022-05-14`
+
+- 修复编译 script setup 错误的问题
+
+## v4.0.1
+
+`2022-03-03`
+
+- 支持复制示例代码到剪贴板
+- 修复官网更新日志的版本链接及 issue 链接异常的问题
+- 修复 ReDoS 安全问题
+
 ## v4.0.0
 
 `2022-02-07`
@@ -10,7 +100,7 @@
 - 使用 vite 代替 webpack 进行构建，移除了所有 webpack 相关依赖
 - 使用 esbuild 进行代码转义和压缩
 - babel preset 添加了 `cjs` 后缀，现在需要通过 `@vant/cli/preset.cjs` 引入
-- vant.config.js 重命名为 `vant.config.mjs`，由 commonJs 变更为 ESModule 格式
+- vant.config.js 重命名为 `vant.config.mjs`，由 CommonJS 变更为 ESModule 格式
 - 站点构建产物的目录由 `site` 调整为 `site-dist`
 - 不再支持 webpack.config.js 配置文件
 - 不再支持 less import 语法中使用波浪号
@@ -382,15 +472,15 @@ yarn add sass
 
 `2020-03-29`
 
-- 优化网站导航栏在大屏上的适配 ([#5928](https://github.com/youzan/vant/pull/5928))
+- 优化网站导航栏在大屏上的适配 ([#5928](https://github.com/vant-ui/vant/pull/5928))
 
 ### v2.3.0
 
 `2020-03-25`
 
-- build 命令支持编译 scoped 样式 ([#5910](https://github.com/youzan/vant/pull/5910))
-- build 命令支持生成 WebStorm 组件定义文件 ([#5899](https://github.com/youzan/vant/issues/5899))
-- clean 命令现在会移除而不是清空文件夹 ([#5895](https://github.com/youzan/vant/issues/5895))
+- build 命令支持编译 scoped 样式 ([#5910](https://github.com/vant-ui/vant/pull/5910))
+- build 命令支持生成 WebStorm 组件定义文件 ([#5899](https://github.com/vant-ui/vant/issues/5899))
+- clean 命令现在会移除而不是清空文件夹 ([#5895](https://github.com/vant-ui/vant/issues/5895))
 - 升级 @vant/markdown-vetur 2.0.0
 
 ### v2.2.8
@@ -424,7 +514,7 @@ yarn add sass
 
 `2020-02-14`
 
-- 修复在 windows 上构建出的样式入口文件路径错误的问题 ([#5655](https://github.com/youzan/vant/pull/5655)
+- 修复在 windows 上构建出的样式入口文件路径错误的问题 ([#5655](https://github.com/vant-ui/vant/pull/5655)
 
 ### v2.2.3
 
@@ -436,14 +526,14 @@ yarn add sass
 
 `2020-02-05`
 
-- 修复在 windows 上获取 markdown 路径错误的问题 ([#5626](https://github.com/youzan/vant/pull/5626))
+- 修复在 windows 上获取 markdown 路径错误的问题 ([#5626](https://github.com/vant-ui/vant/pull/5626))
 
 ### v2.2.1
 
 `2020-02-04`
 
 - 升级 babel@7.8
-- 修复切换版本时跳转 undefined 的问题 ([#5620](https://github.com/youzan/vant/pull/5620))
+- 修复切换版本时跳转 undefined 的问题 ([#5620](https://github.com/vant-ui/vant/pull/5620))
 
 ### v2.2.0
 
@@ -471,7 +561,7 @@ yarn add sass
 
 `2020-01-12`
 
-- 支持自定义 Postcss 配置
+- 支持自定义 PostCSS 配置
 - 支持自定义 devServer 端口
 - 优化文档站点的 meta 字段
 - 新增 API 文档中的版本标签样式

@@ -260,6 +260,21 @@ export default {
 </van-cell-group>
 ```
 
+### 输入框文本位置
+
+通过 `label-align` 属性可以设置输入框文本的位置，可选值为 `center`、`right`、`top`。
+
+```html
+<van-cell-group inset>
+  <van-field
+    v-model="value"
+    label="手机号"
+    placeholder="请输入手机号"
+    label-align="top"
+  />
+</van-cell-group>
+```
+
 ## API
 
 ### Props
@@ -295,27 +310,30 @@ export default {
 | arrow-direction | 箭头方向，可选值为 `left` `up` `down` | _string_ | `right` |
 | label-class | 左侧文本额外类名 | _string \| Array \| object_ | - |
 | label-width | 左侧文本宽度，默认单位为 `px` | _number \| string_ | `6.2em` |
-| label-align | 左侧文本对齐方式，可选值为 `center` `right` | _FieldTextAlign_ | `left` |
+| label-align | 左侧文本对齐方式，可选值为 `center` `right` `top` | _FieldTextAlign_ | `left` |
 | input-align | 输入框对齐方式，可选值为 `center` `right` | _FieldTextAlign_ | `left` |
 | autosize | 是否自适应内容高度，只对 textarea 有效，<br>可传入对象,如 { maxHeight: 100, minHeight: 50 }，<br>单位为`px` | _boolean \| FieldAutosizeConfig_ | `false` |
 | left-icon | 左侧图标名称或图片链接，等同于 Icon 组件的 [name 属性](#/zh-CN/icon#props) | _string_ | - |
 | right-icon | 右侧图标名称或图片链接，等同于 Icon 组件的 [name 属性](#/zh-CN/icon#props) | _string_ | - |
 | icon-prefix | 图标类名前缀，等同于 Icon 组件的 [class-prefix 属性](#/zh-CN/icon#props) | _string_ | `van-icon` |
 | rules | 表单校验规则，详见 [Form 组件](#/zh-CN/form#rule-shu-ju-jie-gou) | _FieldRule[]_ | - |
-| autocomplete `v3.0.3` | input 标签原生的[自动完成属性](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) | _string_ | - |
+| autocomplete `v3.0.3` | HTML 原生属性，用于控制自动完成功能，详见 [MDN - autocomplete](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) | _string_ | - |
+| enterkeyhint `v3.4.8` | HTML 原生属性，用于控制回车键样式，此 API 仅在部分浏览器支持，详见 [MDN - enterkeyhint](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/enterkeyhint)<br> | _string_ | - |
 
 ### Events
 
-| 事件               | 说明                 | 回调参数                       |
-| ------------------ | -------------------- | ------------------------------ |
+| 事件 | 说明 | 回调参数 |
+| --- | --- | --- |
 | update:model-value | 输入框内容变化时触发 | _value: string (当前输入的值)_ |
-| focus              | 输入框获得焦点时触发 | _event: Event_                 |
-| blur               | 输入框失去焦点时触发 | _event: Event_                 |
-| clear              | 点击清除按钮时触发   | _event: MouseEvent_            |
-| click              | 点击组件时触发       | _event: MouseEvent_            |
-| click-input        | 点击输入区域时触发   | _event: MouseEvent_            |
-| click-left-icon    | 点击左侧图标时触发   | _event: MouseEvent_            |
-| click-right-icon   | 点击右侧图标时触发   | _event: MouseEvent_            |
+| focus | 输入框获得焦点时触发 | _event: Event_ |
+| blur | 输入框失去焦点时触发 | _event: Event_ |
+| clear | 点击清除按钮时触发 | _event: MouseEvent_ |
+| click | 点击组件时触发 | _event: MouseEvent_ |
+| click-input | 点击输入区域时触发 | _event: MouseEvent_ |
+| click-left-icon | 点击左侧图标时触发 | _event: MouseEvent_ |
+| click-right-icon | 点击右侧图标时触发 | _event: MouseEvent_ |
+| start-validate `v3.5.1` | 开始表单校验时触发 | - |
+| end-validate `v3.5.1` | 结束表单校验时触发 | _{ status: string, message: string }_ |
 
 ### 方法
 
@@ -345,6 +363,7 @@ import type {
   FieldValidateError,
   FieldAutosizeConfig,
   FieldValidateTrigger,
+  FieldValidationStatus,
 } from 'vant';
 ```
 
@@ -380,7 +399,7 @@ fieldRef.value?.focus();
 | 名称                                  | 默认值                    | 描述 |
 | ------------------------------------- | ------------------------- | ---- |
 | --van-field-label-width               | _6.2em_                   | -    |
-| --van-field-label-color               | _var(--van-gray-7)_       | -    |
+| --van-field-label-color               | _var(--van-text-color)_   | -    |
 | --van-field-label-margin-right        | _var(--van-padding-sm)_   | -    |
 | --van-field-input-text-color          | _var(--van-text-color)_   | -    |
 | --van-field-input-error-text-color    | _var(--van-danger-color)_ | -    |

@@ -1,6 +1,6 @@
 {
   "name": "@vant/eslint-config",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "eslint config of vant",
   "main": "index.js",
   "publishConfig": {
@@ -13,24 +13,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/youzan/vant.git",
+    "url": "https://github.com/vant-ui/vant.git",
     "directory": "packages/vant-eslint-config"
   },
-  "bugs": "https://github.com/youzan/vant/issues",
+  "bugs": "https://github.com/vant-ui/vant/issues",
   "author": "chenjiahan",
   "license": "MIT",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.10.0",
-    "@typescript-eslint/parser": "^5.10.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-vue": "^8.4.0"
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-vue": "^9.8.0"
   },
   "devDependencies": {
-    "enhanced-resolve": "^5.8.3",
-    "eslint": "^8.7.0",
-    "typescript": "~4.5.5"
+    "enhanced-resolve": "^5.12.0",
+    "eslint": "^8.31.0",
+    "jest": "^29.3.1",
+    "typescript": "^4.8.2"
   },
   "peerDependencies": {
     "eslint": "^7.32.0 || ^8.2.0"

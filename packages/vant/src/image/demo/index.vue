@@ -3,7 +3,7 @@ import VanRow from '../../row';
 import VanImage from '..';
 import VanCol from '../../col';
 import VanLoading from '../../loading';
-import { useTranslate } from '../../../docs/site/use-translate';
+import { cdnURL, useTranslate } from '../../../docs/site';
 
 const t = useTranslate({
   'zh-CN': {
@@ -28,7 +28,7 @@ const t = useTranslate({
   },
 });
 
-const image = 'https://img.yzcdn.cn/vant/cat.jpeg';
+const image = cdnURL('cat.jpeg');
 const fits = ['contain', 'cover', 'fill', 'none', 'scale-down'] as const;
 const positions1 = ['left', 'center', 'right'] as const;
 const positions2 = ['top', 'center', 'bottom'] as const;
@@ -124,7 +124,7 @@ const positions2 = ['top', 'center', 'bottom'] as const;
 <style lang="less">
 .demo-image {
   overflow-x: hidden;
-  background-color: var(--van-background-color-light);
+  background-color: var(--van-background-2);
 
   .van-row {
     padding: 0 var(--van-padding-md);

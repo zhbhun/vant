@@ -58,8 +58,8 @@ Use `lazy-render` prop to enable lazy rendering.
 export default {
   setup() {
     const images = [
-      'https://img.yzcdn.cn/vant/apple-1.jpg',
-      'https://img.yzcdn.cn/vant/apple-2.jpg',
+      'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg',
+      'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg',
     ];
     return { images };
   },
@@ -78,11 +78,11 @@ export default {
 ```
 
 ```js
-import { Toast } from 'vant';
+import { showToast } from 'vant';
 
 export default {
   setup() {
-    const onChange = (index) => Toast('Current Swipe index:' + index);
+    const onChange = (index) => showToast('Current Swipe index:' + index);
     return { onChange };
   },
 };
@@ -158,9 +158,11 @@ export default {
 
 ### Swipe Events
 
-| Event  | Description                        | Arguments                     |
-| ------ | ---------------------------------- | ----------------------------- |
-| change | Emitted when current swipe changed | index: index of current swipe |
+| Event | Description | Arguments |
+| --- | --- | --- |
+| change | Emitted when current swipe changed | _index: number_ |
+| drag-start `v4.0.9` | Emitted when user starts dragging the swipe | - |
+| drag-end `v4.0.9` | Emitted when user ends dragging the swipe | - |
 
 ### SwipeItem Events
 
@@ -223,5 +225,5 @@ The component provides the following CSS variables, which can be used to customi
 | --van-swipe-indicator-margin | _var(--van-padding-sm)_ | - |
 | --van-swipe-indicator-active-opacity | _1_ | - |
 | --van-swipe-indicator-inactive-opacity | _0.3_ | - |
-| --van-swipe-indicator-active-background-color | _var(--van-primary-color)_ | - |
-| --van-swipe-indicator-inactive-background-color | _var(--van-border-color)_ | - |
+| --van-swipe-indicator-active-background | _var(--van-primary-color)_ | - |
+| --van-swipe-indicator-inactive-background | _var(--van-border-color)_ | - |

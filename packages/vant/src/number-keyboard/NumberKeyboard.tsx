@@ -21,6 +21,7 @@ import {
   stopPropagation,
   createNamespace,
   HAPTICS_FEEDBACK,
+  type Numeric,
 } from '../utils';
 
 // Composables
@@ -34,13 +35,13 @@ const [name, bem] = createNamespace('number-keyboard');
 export type NumberKeyboardTheme = 'default' | 'custom';
 
 type KeyConfig = {
-  text?: number | string;
+  text?: Numeric;
   type?: KeyType;
   color?: string;
   wider?: boolean;
 };
 
-const numberKeyboardProps = {
+export const numberKeyboardProps = {
   show: Boolean,
   title: String,
   theme: makeStringProp<NumberKeyboardTheme>('default'),
@@ -65,8 +66,20 @@ const numberKeyboardProps = {
 
 export type NumberKeyboardProps = ExtractPropTypes<typeof numberKeyboardProps>;
 
+function shuffle(array: unknown[]) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
+
 export default defineComponent({
   name,
+
+  inheritAttrs: false,
 
   props: numberKeyboardProps,
 
@@ -80,7 +93,7 @@ export default defineComponent({
     'update:modelValue',
   ],
 
-  setup(props, { emit, slots }) {
+  setup(props, { emit, slots, attrs }) {
     const root = ref<HTMLElement>();
 
     const genBasicKeys = () => {
@@ -89,7 +102,7 @@ export default defineComponent({
         .map((_, i) => ({ text: i + 1 }));
 
       if (props.randomKeyOrder) {
-        keys.sort(() => (Math.random() > 0.5 ? 1 : -1));
+        shuffle(keys);
       }
 
       return keys;
@@ -269,10 +282,9 @@ export default defineComponent({
               unfit: !props.safeAreaInsetBottom,
               'with-title': !!Title,
             })}
-            onTouchstart={stopPropagation}
             onAnimationend={onAnimationEnd}
-            // @ts-ignore
-            onWebkitAnimationEnd={onAnimationEnd}
+            onTouchstartPassive={stopPropagation}
+            {...attrs}
           >
             {Title}
             <div class={bem('body')}>

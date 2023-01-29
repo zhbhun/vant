@@ -12,6 +12,18 @@ test('should emit load event when reaching bottom', async () => {
   wrapper.unmount();
 });
 
+test('should not emit load event when disabled', async () => {
+  const wrapper = mount(List, {
+    props: {
+      disabled: true,
+    },
+  });
+
+  await later();
+  expect(wrapper.emitted('load')).toBeFalsy();
+  expect(wrapper.emitted('update:loading')).toBeFalsy();
+});
+
 test('should reload after clicking the error text', async () => {
   const wrapper = mount(List, {
     props: {
@@ -159,7 +171,7 @@ test('should not emit load event when inside an inactive tab', async () => {
   expect(onLoad2).toHaveBeenCalledTimes(0);
 });
 
-// https://github.com/youzan/vant/issues/9017
+// https://github.com/vant-ui/vant/issues/9017
 test('should emit load event when parent tab is activated', async () => {
   const onLoad1 = jest.fn();
   const onLoad2 = jest.fn();

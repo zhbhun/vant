@@ -125,7 +125,7 @@ Set `show-confirm` to `false` to hide the confirm button. In this case, the `con
 Use `color` prop to custom calendar color.
 
 ```html
-<van-calendar v-model:show="show" color="#1989fa" />
+<van-calendar v-model:show="show" color="#ee0a24" />
 ```
 
 ### Custom Date Range
@@ -208,7 +208,7 @@ export default {
 
 ### Custom Position
 
-Use `position` to custom popup position，can be set to `top`、`left`、`right`.
+Use `position` to custom popup position, can be set to `top`、`left`、`right`.
 
 ```html
 <van-calendar v-model:show="show" :round="false" position="right" />
@@ -249,9 +249,9 @@ Set `poppable` to `false`, the calendar will be displayed directly on the page i
 
 | Attribute | Description | Type | Default |
 | --- | --- | --- | --- |
-| type | Type，can be set to `range` `multiple` | _string_ | `single` |
+| type | Type, can be set to `range` `multiple` | _string_ | `single` |
 | title | Title of calendar | _string_ | `Calendar` |
-| color | Color for the bottom button and selected date | _string_ | `#ee0a24` |
+| color | Color for the bottom button and selected date | _string_ | `#1989fa` |
 | min-date | Min date | _Date_ | Today |
 | max-date | Max date | _Date_ | Six months after the today |
 | default-date | Default selected date | _Date \| Date[] \| null_ | Today |
@@ -319,26 +319,27 @@ Following props are supported when the type is multiple
 | Event | Description | Arguments |
 | --- | --- | --- |
 | select | Emitted when date is selected | _value: Date \| Date[]_ |
-| confirm | Emitted after date selection is complete，if `show-confirm` is `true`, it is Emitted after clicking the confirm button | _value: Date \| Date[]_ |
+| confirm | Emitted after date selection is complete, if `show-confirm` is `true`, it is Emitted after clicking the confirm button | _value: Date \| Date[]_ |
 | open | Emitted when opening Popup | - |
 | close | Emitted when closing Popup | - |
 | opened | Emitted when Popup is opened | - |
 | closed | Emitted when Popup is closed | - |
 | unselect | Emitted when unselect date when type is multiple | _value: Date_ |
-| month-show | Emitted when a month enters the visible area | _{ date: Date, title: string }_ |
+| month-show | Emitted when a month enters the visible area | _value: { date: Date, title: string }_ |
 | over-range | Emitted when exceeded max range | - |
 | click-subtitle `v3.1.3` | Emitted when clicking the subtitle | _event: MouseEvent_ |
 
 ### Slots
 
-| Name                  | Description               | SlotProps               |
-| --------------------- | ------------------------- | ----------------------- |
-| title                 | Custom title              | -                       |
-| subtitle `v3.1.3`     | Custom subtitle           | -                       |
-| footer                | Custom footer             | -                       |
-| confirm-text `v3.2.6` | Custom confirm text       | _{ disabled: boolean }_ |
-| top-info `v3.0.17`    | Custom top info of day    | _day: Day_              |
-| bottom-info `v3.0.17` | Custom bottom info of day | _day: Day_              |
+| Name | Description | SlotProps |
+| --- | --- | --- |
+| title | Custom title | - |
+| subtitle `v3.1.3` | Custom subtitle | _{ text: string, date?: Date }_ |
+| month-title `v4.0.9` | Custom title of every month | _{ text: string, date: Date }_ |
+| footer | Custom footer | - |
+| confirm-text `v3.2.6` | Custom confirm text | _{ disabled: boolean }_ |
+| top-info `v3.0.17` | Custom top info of day | _day: Day_ |
+| bottom-info `v3.0.17` | Custom bottom info of day | _day: Day_ |
 
 ### Methods
 
@@ -348,6 +349,7 @@ Use [ref](https://v3.vuejs.org/guide/component-template-refs.html) to get Calend
 | --- | --- | --- | --- |
 | reset | Reset selected date, will reset to default date when no params passed | _date?: Date \| Date[]_ | - |
 | scrollToDate | Scroll to date | _date: Date_ | - |
+| getSelectedDate | get selected date | - | _Date \| Date[] \| null_ |
 
 ### Types
 
@@ -382,9 +384,9 @@ The component provides the following CSS variables, which can be used to customi
 
 | Name | Default Value | Description |
 | --- | --- | --- |
-| --van-calendar-background-color | _var(--van-background-color-light)_ | - |
+| --van-calendar-background | _var(--van-background-2)_ | - |
 | --van-calendar-popup-height | _80%_ | - |
-| --van-calendar-header-box-shadow | _0 2px 10px rgba(125, 126, 128, 0.16)_ | - |
+| --van-calendar-header-shadow | _0 2px 10px rgba(125, 126, 128, 0.16)_ | - |
 | --van-calendar-header-title-height | _44px_ | - |
 | --van-calendar-header-title-font-size | _var(--van-font-size-lg)_ | - |
 | --van-calendar-header-subtitle-font-size | _var(--van-font-size-md)_ | - |
@@ -395,15 +397,16 @@ The component provides the following CSS variables, which can be used to customi
 | --van-calendar-month-mark-font-size | _160px_ | - |
 | --van-calendar-day-height | _64px_ | - |
 | --van-calendar-day-font-size | _var(--van-font-size-lg)_ | - |
+| --van-calendar-day-margin-bottom | _4px_ | - |
 | --van-calendar-range-edge-color | _var(--van-white)_ | - |
-| --van-calendar-range-edge-background-color | _var(--van-danger-color)_ | - |
-| --van-calendar-range-middle-color | _var(--van-danger-color)_ | - |
+| --van-calendar-range-edge-background | _var(--van-primary-color)_ | - |
+| --van-calendar-range-middle-color | _var(--van-primary-color)_ | - |
 | --van-calendar-range-middle-background-opacity | _0.1_ | - |
 | --van-calendar-selected-day-size | _54px_ | - |
 | --van-calendar-selected-day-color | _var(--van-white)_ | - |
 | --van-calendar-info-font-size | _var(--van-font-size-xs)_ | - |
 | --van-calendar-info-line-height | _var(--van-line-height-xs)_ | - |
-| --van-calendar-selected-day-background-color | _var(--van-danger-color)_ | - |
+| --van-calendar-selected-day-background | _var(--van-primary-color)_ | - |
 | --van-calendar-day-disabled-color | _var(--van-text-color-3)_ | - |
 | --van-calendar-confirm-button-height | _36px_ | - |
 | --van-calendar-confirm-button-margin | _7px 0_ | - |

@@ -32,7 +32,7 @@ app.use(Popover);
 
 ```js
 import { ref } from 'vue';
-import { Toast } from 'vant';
+import { showToast } from 'vant';
 
 export default {
   setup() {
@@ -44,7 +44,7 @@ export default {
       { text: '选项二' },
       { text: '选项三' },
     ];
-    const onSelect = (action) => Toast(action.text);
+    const onSelect = (action) => showToast(action.text);
 
     return {
       actions,
@@ -214,6 +214,41 @@ export default {
 };
 ```
 
+### 非受控模式
+
+你可以把 Popover 当做受控组件或非受控组件使用：
+
+- 当绑定 `v-model:show` 时，Popover 为受控组件，此时组件的显示完全由 `v-model:show` 的值决定。
+- 当未绑定 `v-model:show` 时，Popover 为非受控组件，此时你可以通过 `show` 属性传入一个默认值，组件值的显示由组件自身控制。
+
+```html
+<van-popover :actions="actions" position="top-start" @select="onSelect">
+  <template #reference>
+    <van-button type="primary">非受控模式</van-button>
+  </template>
+</van-popover>
+```
+
+```js
+import { ref } from 'vue';
+import { showToast } from 'vant';
+
+export default {
+  setup() {
+    const actions = [
+      { text: '选项一' },
+      { text: '选项二' },
+      { text: '选项三' },
+    ];
+    const onSelect = (action) => showToast(action.text);
+    return {
+      actions,
+      onSelect,
+    };
+  },
+};
+```
+
 ## API
 
 ### Props
@@ -291,17 +326,17 @@ import type {
 | 名称 | 默认值 | 描述 |
 | --- | --- | --- |
 | --van-popover-arrow-size | _6px_ | - |
-| --van-popover-border-radius | _var(--van-border-radius-lg)_ | - |
+| --van-popover-radius | _var(--van-radius-lg)_ | - |
 | --van-popover-action-width | _128px_ | - |
 | --van-popover-action-height | _44px_ | - |
 | --van-popover-action-font-size | _var(--van-font-size-md)_ | - |
 | --van-popover-action-line-height | _var(--van-line-height-md)_ | - |
 | --van-popover-action-icon-size | _20px_ | - |
 | --van-popover-light-text-color | _var(--van-text-color)_ | - |
-| --van-popover-light-background-color | _var(--van-background-color-light)_ | - |
+| --van-popover-light-background | _var(--van-background-2)_ | - |
 | --van-popover-light-action-disabled-text-color | _var(--van-text-color-3)_ | - |
 | --van-popover-dark-text-color | _var(--van-white)_ | - |
-| --van-popover-dark-background-color | _#4a4a4a_ | - |
+| --van-popover-dark-background | _#4a4a4a_ | - |
 | --van-popover-dark-action-disabled-text-color | _var(--van-text-color-2)_ | - |
 
 ## 常见问题

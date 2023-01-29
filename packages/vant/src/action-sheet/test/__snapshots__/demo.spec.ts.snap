@@ -67,24 +67,74 @@ exports[`should render demo and match snapshot 1`] = `
     </i>
   </div>
 </div>
-<transition-stub>
+<transition-stub name="van-fade"
+                 appear="true"
+                 persisted="false"
+                 css="true"
+                 role="button"
+                 tabindex="0"
+>
 </transition-stub>
-<transition-stub>
+<transition-stub name="van-popup-slide-bottom"
+                 appear="false"
+                 persisted="false"
+                 css="true"
+>
 </transition-stub>
-<transition-stub>
+<transition-stub name="van-fade"
+                 appear="true"
+                 persisted="false"
+                 css="true"
+                 role="button"
+                 tabindex="0"
+>
 </transition-stub>
-<transition-stub>
+<transition-stub name="van-popup-slide-bottom"
+                 appear="false"
+                 persisted="false"
+                 css="true"
+>
 </transition-stub>
-<transition-stub>
+<transition-stub name="van-fade"
+                 appear="true"
+                 persisted="false"
+                 css="true"
+                 role="button"
+                 tabindex="0"
+>
 </transition-stub>
-<transition-stub>
+<transition-stub name="van-popup-slide-bottom"
+                 appear="false"
+                 persisted="false"
+                 css="true"
+>
 </transition-stub>
-<transition-stub>
+<transition-stub name="van-fade"
+                 appear="true"
+                 persisted="false"
+                 css="true"
+                 role="button"
+                 tabindex="0"
+>
 </transition-stub>
-<transition-stub>
+<transition-stub name="van-popup-slide-bottom"
+                 appear="false"
+                 persisted="false"
+                 css="true"
+>
 </transition-stub>
-<transition-stub>
+<transition-stub name="van-fade"
+                 appear="true"
+                 persisted="false"
+                 css="true"
+                 role="button"
+                 tabindex="0"
+>
 </transition-stub>
-<transition-stub>
+<transition-stub name="van-popup-slide-bottom"
+                 appear="false"
+                 persisted="false"
+                 css="true"
+>
 </transition-stub>
 `;
